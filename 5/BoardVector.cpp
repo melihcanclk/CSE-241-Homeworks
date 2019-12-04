@@ -1,7 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include "BoardVector.h"
 
-using std::cout;
+using namespace std;
 
 BoardVector::BoardVector(int size){
     int index=1,i = 0, j = 0;
@@ -31,5 +32,23 @@ void BoardVector::print(){
             cout << " ";
         }
         cout << "\n";
+    }
+}
+void BoardVector::readFromFile(char *argv){
+    int coordinates[2],k=0;
+    ifstream infile(argv);
+    if(!infile.is_open()){
+        cout << "File couldn't be open." << "\n";
+    }
+     string pString;
+     calculateXandY(argv,coordinates);
+    for (int i = 0; i < coordinates[1]; i++) {
+        vector<int> temp;
+        for (int j = 0; j < (coordinates[0]/coordinates[1]) +1; j++) {
+            infile >> pString;
+            temp.push_back(convertStringToInt(pString));
+            k++;
+        }
+        vctr.push_back(temp);
     }
 }

@@ -10,8 +10,8 @@ class BoardVector:public AbstractClass {
     public:
     BoardVector(int size);
     void print()override;         
-    /*void readFromFile()override;  
-    void writeToFile()override;   
+    void readFromFile(char * argv)override;  
+    /*void writeToFile()override;   
     void reset()override;         
     void setSize(int size)override;   
     void move(char direction)override;
