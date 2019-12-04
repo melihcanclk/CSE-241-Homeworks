@@ -4,7 +4,7 @@
 
 using namespace std;
 
-BoardVector::BoardVector(int size){
+void BoardVector::setSize(int size){
     int index=1,i = 0, j = 0;
     for ( i = 0; i < size; i++) {
         vector<int> temp;
@@ -16,7 +16,6 @@ BoardVector::BoardVector(int size){
     }
     vctr[j-1][i-1] = -1;           //overloadladıktan sonra () ile yap
 }
-
 
 void BoardVector::print(){
     int x = vctr[0].size(),y = vctr.size();
@@ -35,22 +34,26 @@ void BoardVector::print(){
     }
 }
 void BoardVector::readFromFile(char *argv){
+    if(vctr.size() >0){
+        reset();
+        print();
+    }
     int coordinates[2],k=0;
-    ifstream infile(argv);
-    if(!infile.is_open()){
-        cout << "File couldn't be open." << "\n";
-    }
-     string pString;
-     calculateXandY(argv,coordinates);
-    for (int i = 0; i < coordinates[1]; i++) {
-        vector<int> temp;
-        for (int j = 0; j < (coordinates[0]/coordinates[1]) +1; j++) {
-            infile >> pString;
-            temp.push_back(convertStringToInt(pString));
-            k++;
+        ifstream infile(argv);
+        if(!infile.is_open()){
+            cout << "File couldn't be open." << "\n";
         }
-        vctr.push_back(temp);
-    }
+        string pString;
+        calculateXandY(argv,coordinates);
+        for (int i = 0; i < coordinates[1]; i++) {
+            vector<int> temp;
+            for (int j = 0; j < coordinates[0]; j++) {
+                infile >> pString;
+                temp.push_back(convertStringToInt(pString));
+                k++;
+            }
+            vctr.push_back(temp);
+        }
 }
 
 
@@ -95,6 +98,19 @@ const int &BoardVector::operator()(int x,int y)const { /*rvalue*/
         cout << "This coordinate is not valid." << endl;
     }
 }
+/*
+bool BoardVector::operator==(const BoardVector & right) {
+    int x = vctr[0].size(),y = vctr.size();
+    for (int i = 0; i < y; ++i) {
+        for (int j = 0; j < x; ++j) {                                                            ?
+            if(this->vctr[i][j] != right.vctr[i][j]){
+                return false;
+            }
+        }
+    }
+    return true;
+}*/
+
 bool BoardVector::move(char direction) {
     int temp,x,y;
     int coordinates[2];
@@ -104,37 +120,50 @@ bool BoardVector::move(char direction) {
     y=coordinates[1];
     if(direction == 'L' || direction == 'l'){
         if(isValid('L')){
-            temp = vctr[y][x-1];
-            vctr[y][x-1] = vctr[y][x];
-            vctr[y][x] = temp;
+            temp = (*this)(y,x-1);
+            (*this)(y,x-1) = (*this)(y,x);
+            (*this)(y,x) = temp;
 
         }else{
             return false;
         }
     }else if(direction == 'R' || direction == 'r'){
         if(isValid('R')){
-            temp = vctr[y][x+1];
-            vctr[y][x+1] = vctr[y][x];
-            vctr[y][x] = temp;
+            temp = (*this)(y,x+1);
+            (*this)(y,x+1) = (*this)(y,x);
+            (*this)(y,x) = temp;
         }else{
             return false;
         }
     }else if(direction == 'U' || direction == 'u'){
         if(isValid('U')){
-            temp = vctr[y-1][x];
-            vctr[y-1][x] = vctr[y][x];
-            vctr[y][x]= temp;
+            temp = (*this)(y-1,x);
+            (*this)(y-1,x) = (*this)(y,x);
+            (*this)(y,x)= temp;
         }else{
             return false;
         }
     }else if(direction == 'D' || direction == 'd'){
         if(isValid('D')){
-            temp =vctr[y+1][x];
-            vctr[y+1][x] = vctr[y][x];
-            vctr[y][x] = temp;
+            temp =(*this)(y+1,x);
+            (*this)(y+1,x) = (*this)(y,x);
+            (*this)(y,x) = temp;
         }else{
             return false;
         }
     }
     return true;
 }
+
+void BoardVector::moveRandom(){
+    int moveTo;
+    moveTo = rand()%4;
+    while(!this->isValid(convertMoveIntToChar(moveTo))){
+        moveTo = rand()%4;
+    }
+    move(convertMoveIntToChar(moveTo));
+}
+void BoardVector::reset(){
+    vctr.clear();
+    
+} 

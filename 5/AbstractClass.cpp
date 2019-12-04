@@ -2,7 +2,7 @@
 #include <fstream>
 #include "AbstractClass.h"
 using namespace std;
-/*
+
 int AbstractClass::getNumberOfBoards(){
     return numberOfBoards;
 }
@@ -23,8 +23,8 @@ char AbstractClass::convertMoveIntToChar(int moveTo) {
     }else if (moveTo == 3){
         return 'R';
     }
-}*/
-void AbstractClass::calculateXandY(char * argv,int coordinates[2]){
+}
+void AbstractClass::calculateXandY(string argv,int coordinates[2]){
     ifstream forCount(argv);
     string line;
     if(!forCount.is_open()){
@@ -38,7 +38,7 @@ void AbstractClass::calculateXandY(char * argv,int coordinates[2]){
         }
         counterForY++;
     }
-    coordinates[0] = counterForX;
+    coordinates[0] = (counterForX / counterForY) +1;
     coordinates[1] = counterForY;
 }
 int AbstractClass::convertStringToInt(string str) {
@@ -56,15 +56,22 @@ int AbstractClass::convertStringToInt(string str) {
     }
 }
 
-char AbstractClass::convertMoveIntToChar(int moveTo){
-    if (moveTo == 0) {
-        return 'U';
-    }else if (moveTo == 1){
+char AbstractClass::reverse(char input){
+    if(input == 'U'){
         return 'D';
-    }else if (moveTo == 2){
+    }else if(input == 'D'){
+        return 'U';
+    }else if(input == 'R'){
         return 'L';
-    }else if (moveTo == 3){
+    }else if(input == 'L'){
         return 'R';
     }
 }
 
+void AbstractClass::shuffle(int n) {
+    int i=0,coordinates[2];
+    while (i < n) {
+        moveRandom();
+        i++;
+    }
+}
