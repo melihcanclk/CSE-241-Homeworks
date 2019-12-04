@@ -52,3 +52,89 @@ void BoardVector::readFromFile(char *argv){
         vctr.push_back(temp);
     }
 }
+
+
+bool BoardVector::isValid(const char direction){
+    int coordinates[2];
+    const int EMPTY = -1;
+    findCoordinates(EMPTY,coordinates);
+    if((direction == 'L' || direction == 'l') && coordinates[0]-1 >= 0 && vctr[coordinates[1]][coordinates[0] - 1] != 0){
+        return true;
+    }else if((direction == 'R' || direction == 'r') && coordinates[0]+1 < vctr[0].size() && vctr[coordinates[1]][coordinates[0] + 1] != 0){
+        return true;
+    }else if((direction == 'U' || direction == 'u') && coordinates[1]-1 >= 0 && vctr[coordinates[1] - 1][coordinates[0]] != 0){
+        return true;
+    }else if((direction == 'D' || direction == 'd') && coordinates[1]+1 < vctr.size() && vctr[coordinates[1] + 1][coordinates[0]] != 0){
+        return true;
+    }else {
+        return false;
+    }
+}
+
+void BoardVector::findCoordinates(int number,int coordinates[2]){
+    for (int i = 0; i < vctr.size(); i++) {
+        for (int j = 0; j < vctr[0].size(); j++) {
+            if(vctr[i][j] == number){
+                coordinates[0] = j;
+                coordinates[1] = i;
+            }
+        }
+    }
+}/*
+int &BoardVector::operator()(int x,int y) {              /*lvalue
+    if(x>=0 && x<vctr.size() && y>=0 && y<vctr.size()){
+        return vctr[x][y];
+    }else{
+        cout << "This coordinate is not valid." << endl;
+    }
+}
+const int &BoardVector::operator()(int x,int y)const { /*rvalue
+    if(x>=0 && x< vctr[0].size() && y>=0 && y< vctr.size()){
+      return vctr[x][y];
+    }else{
+        cout << "This coordinate is not valid." << endl;
+    }
+}*/
+bool BoardVector::move(char direction) {
+    int temp,x,y;
+    int coordinates[2];
+    const int EMPTY = -1;
+    findCoordinates(EMPTY,coordinates);
+    x=coordinates[0];
+    y=coordinates[1];
+    if(direction == 'L' || direction == 'l'){
+        if(isValid('L')){
+            temp = vctr[y][x-1];
+            vctr[y][x-1] = vctr[y][x];
+            vctr[y][x] = temp;
+
+        }else{
+            return false;
+        }
+    }else if(direction == 'R' || direction == 'r'){
+        if(isValid('R')){
+            temp = vctr[y][x+1];
+            vctr[y][x+1] = vctr[y][x];
+            vctr[y][x] = temp;
+        }else{
+            return false;
+        }
+    }else if(direction == 'U' || direction == 'u'){
+        if(isValid('U')){
+            temp = vctr[y-1][x];
+            vctr[y-1][x] = vctr[y][x];
+            vctr[y][x]= temp;
+        }else{
+            return false;
+        }
+    }else if(direction == 'D' || direction == 'd'){
+        if(isValid('D')){
+            temp =vctr[y+1][x];
+            vctr[y+1][x] = vctr[y][x];
+            vctr[y][x] = temp;
+        }else{
+            return false;
+        }
+    }
+    return true;
+}

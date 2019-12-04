@@ -67,3 +67,4 @@ char AbstractClass::convertMoveIntToChar(int moveTo){
         return 'R';
     }
 }
+
