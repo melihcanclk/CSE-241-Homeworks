@@ -80,21 +80,21 @@ void BoardVector::findCoordinates(int number,int coordinates[2]){
             }
         }
     }
-}/*
-int &BoardVector::operator()(int x,int y) {              /*lvalue
+}
+int &BoardVector::operator()(int x,int y) {              /*lvalue*/
     if(x>=0 && x<vctr.size() && y>=0 && y<vctr.size()){
         return vctr[x][y];
     }else{
         cout << "This coordinate is not valid." << endl;
     }
 }
-const int &BoardVector::operator()(int x,int y)const { /*rvalue
+const int &BoardVector::operator()(int x,int y)const { /*rvalue*/
     if(x>=0 && x< vctr[0].size() && y>=0 && y< vctr.size()){
       return vctr[x][y];
     }else{
         cout << "This coordinate is not valid." << endl;
     }
-}*/
+}
 bool BoardVector::move(char direction) {
     int temp,x,y;
     int coordinates[2];

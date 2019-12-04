@@ -22,8 +22,8 @@ class BoardVector:public AbstractClass {
     friend bool operator==(const BoardVector & left,const BoardVector & right);*/
     bool isValid(const char direction)override;
     void findCoordinates(int number,int coordinates[2])override;
-    /*const int & operator()(int index1,int index2)const override;
-    int & operator()(int index1,int index2)override;*/
+    const int & operator()(int index1,int index2)const override;
+    int & operator()(int index1,int index2)override;
     private:
     vector<vector<int>> vctr;
 };

@@ -12,9 +12,10 @@ class AbstractClass {
     virtual void reset()=0;         //changes
     virtual void setSize(int size)=0;   //changes*/
     virtual bool move(char direction)=0;//changes
-   /* virtual void isSolved()=0;          //changes
-    virtual void operator()(int index1,int index2)=0;//changes
-    friend bool operator==(const AbstractClass & left,const AbstractClass & right);//doesnt change
+   /* virtual void isSolved()=0;          */ //changes
+    virtual const int & operator()(int index1,int index2)const =0;
+    virtual int & operator()(int index1,int index2)=0;
+    /*friend bool operator==(const AbstractClass & left,const AbstractClass & right);//doesnt change
     int getNumberOfBoards();//doesnt change
     char getLastMove();     //doesnt change
     int getNumberOfMoves(); //doesnt change
