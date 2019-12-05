@@ -12,7 +12,7 @@ class BoardVector:public AbstractClass {
     BoardVector(int size);
     void print()override;         
     void readFromFile(char * argv)override;  
-    /*void writeToFile()override;   */
+    void writeToFile()override;
     void reset()override;         
     void setSize(int size)override;   
     void moveRandom()override;  

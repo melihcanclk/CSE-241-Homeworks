@@ -6,7 +6,7 @@ class AbstractClass {
     virtual bool isValid(const char direction )=0;
     virtual void print()=0;         //changes
     virtual void readFromFile(char* argv)=0;  //changes
-    /*virtual void writeToFile()=0;   *///changes
+    virtual void writeToFile()=0;   //changes
     virtual void reset()=0;         //changes
     virtual void setSize(int size)=0;   //changes
     virtual bool move(char direction)=0;//changes
@@ -22,7 +22,7 @@ class AbstractClass {
     int numberOfBoards;
     char lastMove;
     int numberOfMoves;
-
+    
     int getNumberOfBoards();//doesnt change
     char getLastMove();     //doesnt change
     int getNumberOfMoves(); //doesnt change

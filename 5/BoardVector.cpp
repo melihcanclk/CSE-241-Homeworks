@@ -55,6 +55,31 @@ void BoardVector::readFromFile(char *argv){
             vctr.push_back(temp);
         }
 }
+void BoardVector::writeToFile() {
+    string name;
+    int x = vctr[0].size(),y = vctr.size();
+    cout << "Enter name of txt file:";
+    cin >> name;
+    name = name + ".txt";
+    ofstream onfile(name);
+    for (int i = 0; i < y; i++) {
+        for (int j = 0; j < x; j++) {
+            if((*this)(i,j) == -1) {
+                onfile << "bb";
+            }else if((*this)(i,j) / 10 == 0) {
+                onfile << "0" << (*this)(i,j);
+            }else if((*this)(i,j) / 10 >= 1){
+                onfile << (*this)(i,j);
+            }
+            if(j+1 != x){
+                onfile << " ";
+            }
+        }
+        if(i+1 != y){
+            onfile << "\n";
+        }
+    }
+}
 
 
 bool BoardVector::isValid(const char direction){

@@ -47,7 +47,7 @@ int main(int argc,char **argv){
         cout << "Selection:";
         cin >> decission;
          if (decission == 'E' || decission == 'e') {
-            //bv.writeToFile();
+            acp->writeToFile();
         } else if (decission == 'O' || decission == 'o') {
             std::string nameOfFile;
             cout << "Please enter name of file: ";
