@@ -9,6 +9,7 @@ using std::endl;
 
 int main(int argc,char **argv){
     BoardVector bv;
+    BoardVector final;
     AbstractClass * acp = &bv;
     char decission = 'S';
     srand(time(nullptr));
@@ -22,8 +23,11 @@ int main(int argc,char **argv){
             cout << endl;
         }
     acp->setSize(size);
+    acp->shuffle(RANDOM_MOVES);
+    final.setSize(size);        //create finalboard
     }else{
         acp->readFromFile(argv[1]);
+        final.readFromFile(argv[1]);
     }
     while (decission != 'Q' && decission != 'q') {
         acp->print();

@@ -35,7 +35,7 @@ void BoardVector::print(){
 }
 void BoardVector::readFromFile(char *argv){
     if(vctr.size() >0){
-        reset();
+        vctr.clear();
         print();
     }
     int coordinates[2],k=0;
@@ -164,5 +164,17 @@ void BoardVector::moveRandom(){
     move(convertMoveIntToChar(moveTo));
 }
 void BoardVector::reset(){
-    vctr.clear();
+    int index=1,i=0, j = 0,x,y;
+    x=vctr[0].size();
+    y=vctr.size();
+    for (i = 0; i < y ; i++) {
+        for (j = 0; j < x; j++) {
+            if((*this)(i,j) != 0) {
+                (*this)(i,j) = index;
+                index++;
+            }
+        }
+
+    }
+    vctr[i-1][j-1] = -1;
 } 
