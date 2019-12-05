@@ -17,6 +17,7 @@ class AbstractClass {
     virtual void findCoordinates(int number,int coordinates[2])=0;
     virtual void moveRandom()=0;  
     void shuffle(int n); 
+    void calculateXandY(std::string argv,int coordinates[2]);
     protected:
     int numberOfBoards;
     char lastMove;
@@ -28,7 +29,6 @@ class AbstractClass {
     int convertStringToInt(std::string str);
     char convertMoveIntToChar(int moveTo);      // Convert 1,2,3,4 to U,D,L,R
     char reverse(char input);
-    void calculateXandY(std::string argv,int coordinates[2]);
     
 };
 

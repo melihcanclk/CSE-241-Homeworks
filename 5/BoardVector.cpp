@@ -163,6 +163,7 @@ void BoardVector::moveRandom(){
     }
     move(convertMoveIntToChar(moveTo));
 }
+
 void BoardVector::reset(){
     int index=1,i=0, j = 0,x,y;
     x=vctr[0].size();
@@ -177,4 +178,5 @@ void BoardVector::reset(){
 
     }
     vctr[i-1][j-1] = -1;
-} 
+}
+ 
