@@ -14,19 +14,19 @@ void BoardVector::setSize(int size){
         }
         vctr.push_back(temp);
     }
-    vctr[j-1][i-1] = -1;           //overloadladıktan sonra () ile yap
+    (*this)(i-1,j-1) = -1;           
 }
 
 void BoardVector::print(){
     int x = vctr[0].size(),y = vctr.size();
     for (int i = 0; i < y; i++){
         for (int j = 0; j < x; j++) {
-            if(vctr[i][j] == -1) {           //overloadladıktan sonra () ile yap
+            if((*this)(i,j) == -1) {           
                 cout << "bb";
-            }else if(vctr[i][j] / 10 == 0) {
-                cout << "0" << vctr[i][j];  
-            }else if(vctr[i][j] / 10 >= 1){          //overloadladıktan sonra () ile yap
-                cout << vctr[i][j];
+            }else if((*this)(i,j) / 10 == 0) {
+                cout << "0" << (*this)(i,j);  
+            }else if((*this)(i,j)/ 10 >= 1){          
+                cout << (*this)(i,j);
             }
             cout << " ";
         }
@@ -61,13 +61,13 @@ bool BoardVector::isValid(const char direction){
     int coordinates[2];
     const int EMPTY = -1;
     findCoordinates(EMPTY,coordinates);
-    if((direction == 'L' || direction == 'l') && coordinates[0]-1 >= 0 && vctr[coordinates[1]][coordinates[0] - 1] != 0){
+    if((direction == 'L' || direction == 'l') && coordinates[0]-1 >= 0 && (*this)(coordinates[1],coordinates[0] - 1) != 0){
         return true;
-    }else if((direction == 'R' || direction == 'r') && coordinates[0]+1 < vctr[0].size() && vctr[coordinates[1]][coordinates[0] + 1] != 0){
+    }else if((direction == 'R' || direction == 'r') && coordinates[0]+1 < vctr[0].size() && (*this)(coordinates[1],coordinates[0]+ 1) != 0){
         return true;
-    }else if((direction == 'U' || direction == 'u') && coordinates[1]-1 >= 0 && vctr[coordinates[1] - 1][coordinates[0]] != 0){
+    }else if((direction == 'U' || direction == 'u') && coordinates[1]-1 >= 0 && (*this)(coordinates[1] -1,coordinates[0]) != 0){
         return true;
-    }else if((direction == 'D' || direction == 'd') && coordinates[1]+1 < vctr.size() && vctr[coordinates[1] + 1][coordinates[0]] != 0){
+    }else if((direction == 'D' || direction == 'd') && coordinates[1]+1 < vctr.size() && (*this)(coordinates[1] +1,coordinates[0]) != 0){
         return true;
     }else {
         return false;
@@ -77,7 +77,7 @@ bool BoardVector::isValid(const char direction){
 void BoardVector::findCoordinates(int number,int coordinates[2]){
     for (int i = 0; i < vctr.size(); i++) {
         for (int j = 0; j < vctr[0].size(); j++) {
-            if(vctr[i][j] == number){
+            if((*this)(i,j) == number){
                 coordinates[0] = j;
                 coordinates[1] = i;
             }
@@ -165,5 +165,4 @@ void BoardVector::moveRandom(){
 }
 void BoardVector::reset(){
     vctr.clear();
-    
 } 
