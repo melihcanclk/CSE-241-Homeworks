@@ -201,3 +201,20 @@ void AbstractClass::moveRandom(){
     }
     move(convertMoveIntToChar(moveTo));
 }
+
+bool AbstractClass::operator==(const AbstractClass & right){
+    for(int i = 0; i < size[1] ;i++){
+        for (int j = 0; j < size[0]; j++)
+        {
+            if((*this)(j,i) != right(j,i)){
+                return false;
+            }
+        }
+        
+    }
+    return true;
+}
+
+bool AbstractClass::isSolved(){
+
+}

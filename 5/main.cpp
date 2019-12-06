@@ -25,7 +25,7 @@ int main(int argc,char **argv){
             cout << endl;
         }
         acp->setSize(size);
-        acp->shuffle(size[0] * size[1]);
+        acp->shuffle(1);
         final.setSize(size);        //create finalboard
     }else{
         acp->readFromFile(argv[1]);
@@ -33,6 +33,7 @@ int main(int argc,char **argv){
         final.reset();
     }
     while (decission != 'Q' && decission != 'q') {
+
         acp->print();
         cout << "Please select one of the selection below:" << "\n";
         cout << "U,u->Moves up." << "\n";

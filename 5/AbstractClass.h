@@ -10,10 +10,10 @@ class AbstractClass {
     virtual void reset()=0;         //changes
     virtual void setSize(int coordinates[2]);   //changes
     virtual bool move(char direction);//changes
-    //virtual void isSolved()=0;           //changes
+    virtual bool isSolved();           //changes
     virtual const int & operator()(int index1,int index2)const =0;
     virtual int & operator()(int index1,int index2)=0;
-    //virtual bool operator==(const AbstractClass & right)=0;           //?
+    virtual bool operator==(const AbstractClass & right);           //?
     void findCoordinates(int number,int coordinates[2]);
     virtual void moveRandom();
     void shuffle(int n); 

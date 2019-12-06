@@ -66,25 +66,11 @@ const int &BoardVector::operator()(int x,int y)const { /*rvalue*/
 }
 int &BoardVector::operator()(int x,int y) {              /*lvalue*/
     if(x>=0 && x<size[0] && y>=0 && y< size[1]){
-        return vctr[y][x];
+        return vctr[x][y];
     }else{
         cout << "This coordinate is not valid." << endl;
     }
 }
-
-/*
-bool BoardVector::operator==(const BoardVector & right) {
-    int x = vctr[0].size(),y = vctr.size();
-    for (int i = 0; i < y; ++i) {
-        for (int j = 0; j < x; ++j) {                                                            ?
-            if(this->vctr[i][j] != right.vctr[i][j]){
-                return false;
-            }
-        }
-    }
-    return true;
-}*/
-
 
 void BoardVector::reset(){
     AbstractClass::reset();
