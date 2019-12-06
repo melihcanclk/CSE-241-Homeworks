@@ -3,25 +3,26 @@
 #include <string>
 class AbstractClass {
     public:
-    virtual bool isValid(const char direction )=0;
-    virtual void print()=0;         //changes
+    bool isValid(const char direction);
+    virtual void print();         //changes
     virtual void readFromFile(char* argv)=0;  //changes
     virtual void writeToFile()=0;   //changes
     virtual void reset()=0;         //changes
-    virtual void setSize(int size)=0;   //changes
-    virtual bool move(char direction)=0;//changes
+    virtual void setSize(int coordinates[2]);   //changes
+    virtual bool move(char direction);//changes
     //virtual void isSolved()=0;           //changes
     virtual const int & operator()(int index1,int index2)const =0;
     virtual int & operator()(int index1,int index2)=0;
     //virtual bool operator==(const AbstractClass & right)=0;           //?
-    virtual void findCoordinates(int number,int coordinates[2])=0;
-    virtual void moveRandom()=0;  
+    void findCoordinates(int number,int coordinates[2]);
+    virtual void moveRandom();
     void shuffle(int n); 
     void calculateXandY(std::string argv,int coordinates[2]);
     protected:
     int numberOfBoards;
     char lastMove;
     int numberOfMoves;
+    int size[2];
     
     int getNumberOfBoards();//doesnt change
     char getLastMove();     //doesnt change

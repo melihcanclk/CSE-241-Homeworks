@@ -2,6 +2,7 @@
 #include "BoardVector.h"
 #include <iostream>
 #include <cstring>
+#include <assert.h>
 
 using std::cout;
 using std::cin;
@@ -13,16 +14,18 @@ int main(int argc,char **argv){
     AbstractClass * acp = &bv;
     char decission = 'S';
     srand(time(nullptr));
-    int counter=0;
     if(argc == 1){
-        int size=0;
-        while(size<3){
-            cout << "Please enter size of your NPuzzle: ";
-            cin >> size;
+        int size[2] = {0,0};
+        while(size[0]<3 && size[1] < 3){
+            cout << "Please enter x size of your NPuzzle: ";
+            cin >> size[0];
+            cout << endl;
+            cout << "Please enter y size of your NPuzzle: ";
+            cin >> size[1];
             cout << endl;
         }
         acp->setSize(size);
-        acp->shuffle(size * size);
+        acp->shuffle(size[0] * size[1]);
         final.setSize(size);        //create finalboard
     }else{
         acp->readFromFile(argv[1]);
@@ -31,7 +34,6 @@ int main(int argc,char **argv){
     }
     while (decission != 'Q' && decission != 'q') {
         acp->print();
-        final.print();
         cout << "Please select one of the selection below:" << "\n";
         cout << "U,u->Moves up." << "\n";
         cout << "D,d->Moves down" << "\n";
@@ -43,7 +45,7 @@ int main(int argc,char **argv){
         cout << "O,o->Asks a file name and loads the current board "
                 "configuration from the shape file." << "\n";
         cout << "S,s->Shuffle board" << "\n";
-        cout << "Q,q->Quit from the game" << "\n";
+        cout << "Q,q->Quit from the game" << "\n\n\n\n";
         cout << "Selection:";
         cin >> decission;
          if (decission == 'E' || decission == 'e') {
