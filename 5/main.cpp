@@ -1,6 +1,7 @@
 #include "AbstractClass.h"
 #include "BoardVector.h"
 #include "BoardArray2D.h"
+#include "BoardArray1D.h"
 #include <iostream>
 #include <cstring>
 
@@ -14,7 +15,7 @@ int main(int argc,char **argv){
     AbsPtr * absPtr = new AbsPtr[3];
     absPtr[0] = new BoardVector;
     absPtr[1] = new BoardArray2D;
-    absPtr[2] = new BoardVector;
+    absPtr[2] = new BoardArray1D;
     BoardVector final;
     char decission = 'S';
     srand(time(nullptr));
@@ -61,7 +62,6 @@ int main(int argc,char **argv){
                 "configuration as a loadable shape file.." << "\n";
         cout << "O,o->Asks a file name and loads the current board "
                 "configuration from the shape file." << "\n";
-        cout << "S,s->Shuffle board" << "\n";
         cout << "Q,q->Quit from the game" << "\n\n\n\n";
         cout << "Selection:";
         cin >> decission;
@@ -74,14 +74,12 @@ int main(int argc,char **argv){
             nameOfFile = nameOfFile + ".txt";
             char *cstr = new char[nameOfFile.length() + 1];
             strcpy(cstr, nameOfFile.c_str());
-            //acp->readFromFile(cstr);
+             for (int i = 0; i < 3; ++i) {
+                 absPtr[i]->readFromFile(cstr);
+             }
             delete [] cstr;
         } else if (decission == 'Q' || decission == 'q') {
             return 0;
-        } else if (decission == 'S' || decission == 's') {
-            int coordinates[2];
-            //acp->calculateXandY(argv[1],coordinates);
-            //acp->shuffle(coordinates[1] * coordinates[0]);
         } else {
              for (int i = index; i < 3; ++i) {
                  absPtr[i]->move(decission);
