@@ -4,16 +4,20 @@
 #include <cstring>
 #include <assert.h>
 
+char reverse(char decission);
+
 using std::cout;
 using std::cin;
 using std::endl;
 
 int main(int argc,char **argv){
-    BoardVector b1;
-    BoardVector b2;
-    BoardVector b3;
+    int index = 1;
+    typedef AbstractClass* AbsPtr;
+    AbsPtr * absPtr = new AbsPtr[3];
+    absPtr[0] = new BoardVector;
+    absPtr[1] = new BoardVector;
+    absPtr[2] = new BoardVector;
     BoardVector final;
-    AbstractClass * acp = &b1;
     char decission = 'S';
     srand(time(nullptr));
     if(argc == 1){
@@ -26,17 +30,23 @@ int main(int argc,char **argv){
             cin >> size[1];
             cout << endl;
         }
-        acp->setSize(size);
-        //acp->shuffle(3);
+        for (int i = 0; i < 3; ++i) {
+            absPtr[i]->setSize(size);
+        }
+        absPtr[index]->shuffle(2);
         final.setSize(size);        //create finalboard
     }else{
-        acp->readFromFile(argv[1]);
+        for (int i = 0; i < 3; ++i) {
+            absPtr[i]->readFromFile(argv[1]);
+        }
         final.readFromFile(argv[1]);
         final.reset();
     }
     while (decission != 'Q' && decission != 'q') {
-
-        acp->print();
+        for (int i = 0; i < 3; ++i) {
+            absPtr[i]->print();
+            cout << "\n";
+        }
         cout << "Please select one of the selection below:" << "\n";
         cout << "U,u->Moves up." << "\n";
         cout << "D,d->Moves down" << "\n";
@@ -52,7 +62,7 @@ int main(int argc,char **argv){
         cout << "Selection:";
         cin >> decission;
          if (decission == 'E' || decission == 'e') {
-            acp->writeToFile();
+            //acp->writeToFile();
         } else if (decission == 'O' || decission == 'o') {
             std::string nameOfFile;
             cout << "Please enter name of file: ";
@@ -60,17 +70,20 @@ int main(int argc,char **argv){
             nameOfFile = nameOfFile + ".txt";
             char *cstr = new char[nameOfFile.length() + 1];
             strcpy(cstr, nameOfFile.c_str());
-            acp->readFromFile(cstr);
+            //acp->readFromFile(cstr);
             delete [] cstr;
         } else if (decission == 'Q' || decission == 'q') {
             return 0;
         } else if (decission == 'S' || decission == 's') {
             int coordinates[2];
-            acp->calculateXandY(argv[1],coordinates);
-            acp->shuffle(coordinates[1] * coordinates[0]);
+            //acp->calculateXandY(argv[1],coordinates);
+            //acp->shuffle(coordinates[1] * coordinates[0]);
         } else {
-            acp->move(decission);
+             for (int i = index; i < 3; ++i) {
+                 absPtr[i]->move(decission);
+             }
         }
+        index++;
     }
 
 }

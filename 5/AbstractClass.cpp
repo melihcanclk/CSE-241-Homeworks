@@ -136,8 +136,8 @@ bool AbstractClass::isValid(const char direction){
 }
 
 void AbstractClass::findCoordinates(int number,int coordinates[2]){
-    for (int i = 0; i < size[1]; i++) {
-        for (int j = 0; j < size[0]; j++) {
+    for (int i = 0; i < this->size[1]; i++) {
+        for (int j = 0; j < this->size[0]; j++) {
             if((*this)(j,i) == number){
                 coordinates[0] = j;
                 coordinates[1] = i;
@@ -161,13 +161,13 @@ int AbstractClass::convertStringToInt(string str) {
 }
 
 char AbstractClass::reverse(char input){
-    if(input == 'U'){
+    if(input == 'U' || input == 'u'){
         return 'D';
-    }else if(input == 'D'){
+    }else if(input == 'D' || input == 'd'){
         return 'U';
-    }else if(input == 'R'){
+    }else if(input == 'R' || input == 'r'){
         return 'L';
-    }else if(input == 'L'){
+    }else if(input == 'L' || input == 'l'){
         return 'R';
     }
 }
