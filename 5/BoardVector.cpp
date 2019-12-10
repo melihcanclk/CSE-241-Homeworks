@@ -7,15 +7,15 @@ using namespace std;
 void BoardVector::setSize(int coordinates[2]){
     int index=1,i,j;
     AbstractClass::setSize(coordinates);        //set size
-    for ( i = 0; i < coordinates[1]; i++) {
+    for ( i = 0; i < size[1]; i++) {
         vector<int> temp;
-        for ( j = 0; j < coordinates[0]; j++) {
+        for ( j = 0; j < size[0]; j++) {
             temp.push_back(index);
             index++;
         }
         vctr.push_back(temp);
     }
-    vctr[i-1][j-1] = -1;         
+    vctr[i-1][j-1] = -1;
 }
 
 void BoardVector::readFromFile(char *argv){
@@ -30,31 +30,6 @@ void BoardVector::readFromFile(char *argv){
         string pString;
         calculateXandY(argv,coordinates);
         setSize(coordinates);
-}
-void BoardVector::writeToFile() {
-    string name;
-    int x = vctr[0].size(),y = vctr.size();
-    cout << "Enter name of txt file:";
-    cin >> name;
-    name = name + ".txt";
-    ofstream onfile(name);
-    for (int i = 0; i < y; i++) {
-        for (int j = 0; j < x; j++) {
-            if((*this)(i,j) == -1) {
-                onfile << "bb";
-            }else if((*this)(i,j) / 10 == 0) {
-                onfile << "0" << (*this)(i,j);
-            }else if((*this)(i,j) / 10 >= 1){
-                onfile << (*this)(i,j);
-            }
-            if(j+1 != x){
-                onfile << " ";
-            }
-        }
-        if(i+1 != y){
-            onfile << "\n";
-        }
-    }
 }
 
 const int &BoardVector::operator()(int x,int y)const { /*rvalue*/

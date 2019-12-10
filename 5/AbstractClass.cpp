@@ -34,6 +34,31 @@ void AbstractClass::readFromFile(char *argv){
         calculateXandY(argv,coordinates);
         
 }
+
+void AbstractClass::writeToFile() {
+    string name;
+    cout << "Enter name of txt file:";
+    cin >> name;
+    name = name + ".txt";
+    ofstream onfile(name);
+    for (int i = 0; i < size[1]; i++) {
+        for (int j = 0; j < size[0]; j++) {
+            if((*this)(i,j) == -1) {
+                onfile << "bb";
+            }else if((*this)(i,j) / 10 == 0) {
+                onfile << "0" << (*this)(i,j);
+            }else if((*this)(i,j) / 10 >= 1){
+                onfile << (*this)(i,j);
+            }
+            if(j+1 != size[0]){
+                onfile << " ";
+            }
+        }
+        if(i+1 != size[1]){
+            onfile << "\n";
+        }
+    }
+}
 int AbstractClass::getNumberOfBoards(){
     return numberOfBoards;
 }
@@ -145,40 +170,7 @@ void AbstractClass::findCoordinates(int number,int coordinates[2]){
         }
     }
 }
-int AbstractClass::convertStringToInt(string str) {
 
-    if(str.at(0) == '0' && str.at(1) == '0'){
-        return 0;
-    }else if(str.at(0) == '0' && str.at(1) != '0'){
-        return str.at(1) - '0';
-    }else if(str.at(0) != '0' && str.at(1) == '0'){
-        return (str.at(0) - '0') * 10;
-    }else if(str.at(0) == 'b' && str.at(1) == 'b'){
-        return -1;
-    }else if(str.at(0) != '0' && str.at(1) != '0'){
-        return (str.at(0) - '0') * 10 + str.at(1) - '0';
-    }
-}
-
-char AbstractClass::reverse(char input){
-    if(input == 'U' || input == 'u'){
-        return 'D';
-    }else if(input == 'D' || input == 'd'){
-        return 'U';
-    }else if(input == 'R' || input == 'r'){
-        return 'L';
-    }else if(input == 'L' || input == 'l'){
-        return 'R';
-    }
-}
-
-void AbstractClass::shuffle(int n ) {
-    int i=0;
-    while (i < n) {
-        moveRandom();
-        i++;
-    }
-}
 void AbstractClass::reset(){
     int index=1,i=0, j = 0;
     for (i = 0; i < size[1] ; i++) {
@@ -193,13 +185,14 @@ void AbstractClass::reset(){
 }
 
 
-void AbstractClass::moveRandom(){
+char AbstractClass::moveRandom(){
     int moveTo;
     moveTo = rand()%4;
     while(!this->isValid(convertMoveIntToChar(moveTo))){
         moveTo = rand()%4;
     }
     move(convertMoveIntToChar(moveTo));
+    return convertMoveIntToChar(moveTo);
 }
 
 bool AbstractClass::operator==(const AbstractClass & right){

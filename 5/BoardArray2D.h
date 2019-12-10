@@ -1,22 +1,18 @@
-#ifndef BOARDVECTOR_H
-#define BOARDVECTOR_H
+#ifndef BOARDARRAY2D_H
+#define BOARDARRAY2D_H
 #include "AbstractClass.h"
-#include <vector>
 
-using std::vector;
-
-class BoardVector:public AbstractClass {
+class BoardArray2D:public AbstractClass {
 
     public:
-    BoardVector(){}
     void readFromFile(char * argv)override;
-    void reset()override;         
+    void reset()override;
     void setSize(int coordinates[2])override;
     //void isSolved()override;
     const int & operator()(int index1,int index2)const override;
     int & operator()(int index1,int index2)override;
 
     private:
-    vector<vector<int>> vctr;
+    int **arr;
 };
 #endif 

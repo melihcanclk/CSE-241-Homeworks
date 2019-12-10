@@ -1,10 +1,8 @@
 #include "AbstractClass.h"
 #include "BoardVector.h"
+#include "BoardArray2D.h"
 #include <iostream>
 #include <cstring>
-#include <assert.h>
-
-char reverse(char decission);
 
 using std::cout;
 using std::cin;
@@ -15,7 +13,7 @@ int main(int argc,char **argv){
     typedef AbstractClass* AbsPtr;
     AbsPtr * absPtr = new AbsPtr[3];
     absPtr[0] = new BoardVector;
-    absPtr[1] = new BoardVector;
+    absPtr[1] = new BoardArray2D;
     absPtr[2] = new BoardVector;
     BoardVector final;
     char decission = 'S';
@@ -33,7 +31,13 @@ int main(int argc,char **argv){
         for (int i = 0; i < 3; ++i) {
             absPtr[i]->setSize(size);
         }
-        absPtr[index]->shuffle(2);
+        for (int i = 0; i < 3; ++i) {
+            char lastMove;
+            lastMove = absPtr[0]->moveRandom();
+            for (int j = 1; j < 3 ; ++j) {
+                absPtr[j]->move(lastMove);
+            }
+        }
         final.setSize(size);        //create finalboard
     }else{
         for (int i = 0; i < 3; ++i) {
@@ -62,7 +66,7 @@ int main(int argc,char **argv){
         cout << "Selection:";
         cin >> decission;
          if (decission == 'E' || decission == 'e') {
-            //acp->writeToFile();
+             absPtr[index]->writeToFile();
         } else if (decission == 'O' || decission == 'o') {
             std::string nameOfFile;
             cout << "Please enter name of file: ";
