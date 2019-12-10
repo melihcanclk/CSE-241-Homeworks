@@ -9,9 +9,11 @@ using std::cin;
 using std::endl;
 
 int main(int argc,char **argv){
-    BoardVector bv;
+    BoardVector b1;
+    BoardVector b2;
+    BoardVector b3;
     BoardVector final;
-    AbstractClass * acp = &bv;
+    AbstractClass * acp = &b1;
     char decission = 'S';
     srand(time(nullptr));
     if(argc == 1){
@@ -25,7 +27,7 @@ int main(int argc,char **argv){
             cout << endl;
         }
         acp->setSize(size);
-        acp->shuffle(1);
+        //acp->shuffle(3);
         final.setSize(size);        //create finalboard
     }else{
         acp->readFromFile(argv[1]);

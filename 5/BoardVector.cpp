@@ -19,7 +19,7 @@ void BoardVector::setSize(int coordinates[2]){
 }
 
 void BoardVector::readFromFile(char *argv){
-    if(size[0] >0){
+    if(size[0] >0 || size[1]){
         vctr.clear();
     }
     int coordinates[2],k=0;
@@ -59,14 +59,14 @@ void BoardVector::writeToFile() {
 
 const int &BoardVector::operator()(int x,int y)const { /*rvalue*/
     if(x>=0 && x< size[0] && y>=0 && y< size[1]){
-      return vctr[x][y];
+      return vctr[y][x];
     }else{
         cout << "This coordinate is not valid." << endl;
     }
 }
 int &BoardVector::operator()(int x,int y) {              /*lvalue*/
     if(x>=0 && x<size[0] && y>=0 && y< size[1]){
-        return vctr[x][y];
+        return vctr[y][x];
     }else{
         cout << "This coordinate is not valid." << endl;
     }
