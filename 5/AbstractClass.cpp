@@ -3,6 +3,24 @@
 #include "AbstractClass.h"
 using namespace std;
 
+bool isValid(AbstractClass ** pAbstractClass){                          //global function
+    int j=0;
+    for(int i=0;i< 3 -1;i++){
+        /*if(!( pAbstractClass[i]->isSolved() )){
+            return false;
+        }*/
+        int diff = AbstractClass::findDiff(pAbstractClass[i],pAbstractClass[i+1]);
+        if( diff != 1  && diff != -1){
+            return false;
+        }
+    }
+    return true;
+}
+
+
+AbstractClass::AbstractClass(){
+    //AbstractClass::numberOfBoards++;
+}
 void AbstractClass::setSize(int coordinates[2]){
     this->size[0] = coordinates[0];
     this->size[1] = coordinates[1];
@@ -59,14 +77,11 @@ void AbstractClass::writeToFile() {
         }
     }
 }
-int AbstractClass::getNumberOfBoards(){
+/*int AbstractClass::getNumberOfBoards(){
     return numberOfBoards;
-}
+}*/
 char AbstractClass::getLastMove(){
     return lastMove;
-}
-int AbstractClass::getNumberOfMoves(){
-    return numberOfMoves;
 }
 
 char AbstractClass::convertMoveIntToChar(int moveTo) {
@@ -140,6 +155,8 @@ bool AbstractClass::move(char direction) {
             return false;
         }
     }
+    //lastMove = direction;
+    //numberOfMoves++;
     return true;
 }
 
@@ -160,7 +177,7 @@ bool AbstractClass::isValid(const char direction){
     }
 }
 
-void AbstractClass::findCoordinates(int number,int coordinates[2]){
+void AbstractClass::findCoordinates(int number,int coordinates[2])const {
     for (int i = 0; i < this->size[1]; i++) {
         for (int j = 0; j < this->size[0]; j++) {
             if((*this)(j,i) == number){
@@ -169,6 +186,13 @@ void AbstractClass::findCoordinates(int number,int coordinates[2]){
             }
         }
     }
+}
+
+int AbstractClass::findDiff(AbstractClass *left, AbstractClass *right) {
+    int EMPTY = -1,coordinatesleft[2],coordinatesright[2];
+    left->findCoordinates(EMPTY,coordinatesleft);
+    right->findCoordinates(EMPTY,coordinatesright);
+    return (coordinatesleft[0] - coordinatesright[0]) + (coordinatesleft[1] - coordinatesright[1]);
 }
 
 void AbstractClass::reset(){
@@ -208,6 +232,19 @@ bool AbstractClass::operator==(const AbstractClass & right){
     return true;
 }
 
-bool AbstractClass::isSolved(){
-
+bool AbstractClass::isSolved()  {
+    int index=1;
+    for(int i = 0; i < size[1]; ++i){
+        for(int j = 0; j < size[0]; ++j){
+            int a = (*this)(j,i);
+            if(index == (*this)(j,i)){}
+            else{
+                if(i!= size[1]-1 || j != size[0] -1){
+                    return false;
+                }
+            }
+            index++;
+        }
+    }
+    return true;
 }

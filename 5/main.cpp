@@ -9,6 +9,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+
 int main(int argc,char **argv){
     int index = 1;
     typedef AbstractClass* AbsPtr;
@@ -32,7 +33,7 @@ int main(int argc,char **argv){
         for (int i = 0; i < 3; ++i) {
             absPtr[i]->setSize(size);
         }
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 2; ++i) {
             char lastMove;
             lastMove = absPtr[0]->moveRandom();
             for (int j = 1; j < 3 ; ++j) {
@@ -47,11 +48,12 @@ int main(int argc,char **argv){
         final.readFromFile(argv[1]);
         final.reset();
     }
-    while (decission != 'Q' && decission != 'q') {
+    while (decission != 'Q' && decission != 'q' && index < 3) {
         for (int i = 0; i < 3; ++i) {
             absPtr[i]->print();
             cout << "\n";
         }
+
         cout << "Please select one of the selection below:" << "\n";
         cout << "U,u->Moves up." << "\n";
         cout << "D,d->Moves down" << "\n";
@@ -87,5 +89,5 @@ int main(int argc,char **argv){
         }
         index++;
     }
-
+    cout << isValid(absPtr);
 }

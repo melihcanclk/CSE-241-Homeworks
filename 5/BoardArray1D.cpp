@@ -11,6 +11,7 @@ void BoardArray1D::setSize(int coordinates[2]){
     for(int i = 0; i < size[1]; ++i){
         for(int j = 0; j < size[0]; ++j){
             (*this)(j,i) = index;
+            int a = (*this)(j,i);cout << a;
             index++;
         }
     }
@@ -34,7 +35,7 @@ void BoardArray1D::readFromFile(char *argv){
 
 const int &BoardArray1D::operator()(int x,int y)const { /*rvalue*/
     if(x>=0 && x< size[0] && y>=0 && y< size[1]){
-        return arr[size[0] * (y+1) + x];
+        return arr[size[0] * y + x];
     }else{
         cout << "This coordinate is not valid." << endl;
     }

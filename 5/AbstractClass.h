@@ -3,6 +3,7 @@
 #include <string>
 class AbstractClass {
     public:
+    AbstractClass();
     bool isValid(const char direction);
     virtual void print();         //changes
     virtual void readFromFile(char* argv)=0;  //changes
@@ -15,18 +16,20 @@ class AbstractClass {
     virtual int & operator()(int index1,int index2)=0;
     virtual bool operator==(const AbstractClass & right);
     char moveRandom();
-    protected:
-    int numberOfBoards;
-    char lastMove;
-    int numberOfMoves;
-    int size[2];
-    void findCoordinates(int number,int coordinates[2]);
-    void calculateXandY(std::string argv,int coordinates[2]);
-    int getNumberOfBoards();//doesnt change
-    char getLastMove();     //doesnt change
-    int getNumberOfMoves(); //doesnt change
+    static int findDiff(AbstractClass *left, AbstractClass *right);
+    static int getNumberOfBoards();
     char convertMoveIntToChar(int moveTo);      // Convert 1,2,3,4 to U,D,L,R
-    
+    static int numberOfBoards;
+    static int numberOfMoves;
+    protected:
+
+    char lastMove;
+    int size[2];
+    void findCoordinates(int number,int coordinates[2])const;
+    void calculateXandY(std::string argv,int coordinates[2]);
+    char getLastMove();     //doesnt change
 };
+
+bool isValid(AbstractClass ** pAbstractClass);
 
 #endif
