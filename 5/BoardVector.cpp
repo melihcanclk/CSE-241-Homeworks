@@ -51,4 +51,8 @@ void BoardVector::reset(){
     AbstractClass::reset();
     vctr[size[1]-1][size[0]-1] = -1;
 }
+
+BoardVector::BoardVector() {
+
+}
  

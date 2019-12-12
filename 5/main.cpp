@@ -1,4 +1,3 @@
-#include "AbstractClass.h"
 #include "BoardVector.h"
 #include "BoardArray2D.h"
 #include "BoardArray1D.h"
@@ -9,11 +8,10 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-
 int main(int argc,char **argv){
     int index = 1;
-    typedef AbstractClass* AbsPtr;
-    AbsPtr * absPtr = new AbsPtr[3];
+    typedef Puzzle::AbstractClass* AbsPtr;
+    auto * absPtr = new AbsPtr[3];
     absPtr[0] = new BoardVector;
     absPtr[1] = new BoardArray2D;
     absPtr[2] = new BoardArray1D;
@@ -89,5 +87,5 @@ int main(int argc,char **argv){
         }
         index++;
     }
-    cout << isValid(absPtr);
+    cout << isValid(absPtr,3);
 }

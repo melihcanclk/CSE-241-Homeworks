@@ -55,3 +55,7 @@ void BoardArray2D::reset(){
     AbstractClass::reset();
     arr[size[1]-1][size[0]-1] = -1;
 }
+
+BoardArray2D::BoardArray2D() {
+
+}

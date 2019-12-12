@@ -2,10 +2,11 @@
 #include <fstream>
 #include "AbstractClass.h"
 using namespace std;
+using namespace Puzzle;
 
-bool isValid(AbstractClass ** pAbstractClass){                          //global function
+bool isValid(AbstractClass ** pAbstractClass,int size){                          //global function
     int j=0;
-    for(int i=0;i< 3 -1;i++){
+    for(int i=0;i< size -1;i++){
         /*if(!( pAbstractClass[i]->isSolved() )){
             return false;
         }*/

@@ -11,7 +11,6 @@ void BoardArray1D::setSize(int coordinates[2]){
     for(int i = 0; i < size[1]; ++i){
         for(int j = 0; j < size[0]; ++j){
             (*this)(j,i) = index;
-            int a = (*this)(j,i);cout << a;
             index++;
         }
     }
@@ -52,3 +51,5 @@ void BoardArray1D::reset(){
     AbstractClass::reset();
     arr[(size[0] * size[1]) -1] = -1;
 }
+
+BoardArray1D::BoardArray1D()= default;
