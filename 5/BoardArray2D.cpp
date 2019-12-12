@@ -59,3 +59,10 @@ void BoardArray2D::reset(){
 BoardArray2D::BoardArray2D() {
 
 }
+
+BoardArray2D::~BoardArray2D() {
+    for(int i =0 ; i< size[1];++i){
+        delete [] arr[i];
+    }
+    delete [] arr;
+}

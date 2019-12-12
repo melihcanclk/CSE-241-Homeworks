@@ -11,7 +11,7 @@ class BoardArray2D:public Puzzle::AbstractClass {
         void setSize(int coordinates[2])override;
         const int & operator()(int index1,int index2)const override;
         int & operator()(int index1,int index2)override;
-
+        ~BoardArray2D();
     private:
         int **arr;
 };

@@ -52,4 +52,8 @@ void BoardArray1D::reset(){
     arr[(size[0] * size[1]) -1] = -1;
 }
 
+BoardArray1D::~BoardArray1D() {
+    delete [] arr;
+}
+
 BoardArray1D::BoardArray1D()= default;
