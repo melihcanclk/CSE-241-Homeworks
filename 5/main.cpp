@@ -85,4 +85,5 @@ int main(){
         cout << "Board sequence is not valid"<< endl;
     }
     
+    delete [] absPtr;
 }
