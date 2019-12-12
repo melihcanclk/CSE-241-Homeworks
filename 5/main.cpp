@@ -1,3 +1,7 @@
+/*------------------GEBZE TECHNICAL UNIVERSITY---------------------*
+*                    Name : Melihcan Çilek                         *
+*                    Student Number : 1801042092                   *
+*------------------------------------------------------------------*/
 #include "BoardVector.h"
 #include "BoardArray2D.h"
 #include "BoardArray1D.h"
@@ -22,16 +26,17 @@ int main(){
 
     cout << "Number Of board created so far is "<< Puzzle::AbstractClass::getNumberOfBoards()<< endl;
     //Names of files
-    char fileName1 [] = "1.txt";
-    char fileName2 [] = "2.txt";
-    char fileName3 [] = "3.txt";
+    char *fileName[30];
 
+    for(int i=0 ;i<Puzzle::AbstractClass::getNumberOfBoards();i++){
+        cout << "Please enter name of " << i+1 << " th board(with txt name extention):";
+        cin >> fileName[i] ;
+    }
     //Reading Files
     //You have to add file names if you want to read more boards
-    absPtr[0]->readFromFile(fileName1);
-    absPtr[1]->readFromFile(fileName2);
-    absPtr[2]->readFromFile(fileName3);
-
+    for(int i=0 ;i<Puzzle::AbstractClass::getNumberOfBoards();i++){
+        absPtr[i]->readFromFile(fileName[i]);
+    }
     for(int i=0;i<Puzzle::AbstractClass::getNumberOfBoards();++i){
         absPtr[i]->print();
         cout << endl;
@@ -49,9 +54,9 @@ int main(){
     }
     //writing boards to fileName variables
     //You have to add file names if you want to read more boards
-    absPtr[0]->writeToFile(fileName1);
-    absPtr[1]->writeToFile(fileName2);
-    absPtr[2]->writeToFile(fileName3);
+    for(int i=0 ;i<Puzzle::AbstractClass::getNumberOfBoards();i++){
+        absPtr[i]->writeToFile(fileName[i]);
+    }
 
     //Controlling if boards solved or not
    for(int i=0;i<Puzzle::AbstractClass::getNumberOfBoards();i++){
