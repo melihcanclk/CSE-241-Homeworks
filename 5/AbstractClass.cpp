@@ -92,6 +92,7 @@ void AbstractClass::writeToFile(char * filename) {
             onfile << "\n";
         }
     }
+    onfile.close();
 }
 int AbstractClass::getNumberOfBoards(){
     return numberOfBoards;

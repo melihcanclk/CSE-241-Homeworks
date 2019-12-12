@@ -7,7 +7,7 @@ using namespace std;
 void BoardArray1D::setSize(int coordinates[2]){
     int index=1;
     AbstractClass::setSize(coordinates);
-    (arr) = new int[size[1] * size[0]];
+    (this->arr) = new int[size[1] * size[0]];
     for(int i = 0; i < size[1]; ++i){
         for(int j = 0; j < size[0]; ++j){
             (*this)(j,i) = index;
@@ -34,6 +34,7 @@ void BoardArray1D::readFromFile(char *argv){
         infile >> pString;
         arr[i] = convertStringToInt(pString);
     }
+    infile.close();
 }
 
 const int &BoardArray1D::operator()(int x,int y)const { /*rvalue*/

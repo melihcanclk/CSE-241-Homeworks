@@ -36,7 +36,7 @@ void BoardVector::readFromFile(char *argv){
                 vctr[i][j] = convertStringToInt(pString);
             }
         }
-
+    infile.close();
 }
 
 const int &BoardVector::operator()(int x,int y)const { /*rvalue*/
