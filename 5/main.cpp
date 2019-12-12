@@ -3,89 +3,81 @@
 #include "BoardArray1D.h"
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 using std::cout;
 using std::cin;
 using std::endl;
 
-int main(int argc,char **argv){
-    int index = 1;
+//Setting numberOfBoards static variable to 0
+int Puzzle::AbstractClass::numberOfBoards =0 ;
+
+int main(){
     typedef Puzzle::AbstractClass* AbsPtr;
     auto * absPtr = new AbsPtr[3];
+    //Initiliazing AbstractClass ** to boards
     absPtr[0] = new BoardVector;
     absPtr[1] = new BoardArray2D;
     absPtr[2] = new BoardArray1D;
-    BoardVector final;
-    char decission = 'S';
-    srand(time(nullptr));
-    if(argc == 1){
-        int size[2] = {0,0};
-        //while(size[0]<3 && size[1] < 3){
-            cout << "Please enter x size of your NPuzzle: ";
-            cin >> size[0];
-            cout << endl;
-            cout << "Please enter y size of your NPuzzle: ";
-            cin >> size[1];
-            cout << endl;
-        //}
-        for (int i = 0; i < 3; ++i) {
-            absPtr[i]->setSize(size);
-        }
-        for (int i = 0; i < 2; ++i) {
-            char lastMove;
-            lastMove = absPtr[0]->moveRandom();
-            for (int j = 1; j < 3 ; ++j) {
-                absPtr[j]->move(lastMove);
+
+    cout << "Number Of board created so far is "<< Puzzle::AbstractClass::getNumberOfBoards()<< endl;
+    //Names of files
+    char fileName1 [] = "1.txt";
+    char fileName2 [] = "2.txt";
+    char fileName3 [] = "3.txt";
+
+    //Reading Files
+    //You have to add file names if you want to read more boards
+    absPtr[0]->readFromFile(fileName1);
+    absPtr[1]->readFromFile(fileName2);
+    absPtr[2]->readFromFile(fileName3);
+
+    for(int i=0;i<Puzzle::AbstractClass::getNumberOfBoards();++i){
+        absPtr[i]->print();
+        cout << endl;
+    }
+    //Moving all boards
+    for(int i=0;i<Puzzle::AbstractClass::getNumberOfBoards();++i){
+        absPtr[i]->move('l');
+        absPtr[i]->move('u');
+        absPtr[i]->move('l');
+        absPtr[i]->move('r');
+    }
+    for(int i=0;i<Puzzle::AbstractClass::getNumberOfBoards();++i){
+        absPtr[i]->print();
+        cout << endl;
+    }
+    //writing boards to fileName variables
+    //You have to add file names if you want to read more boards
+    absPtr[0]->writeToFile(fileName1);
+    absPtr[1]->writeToFile(fileName2);
+    absPtr[2]->writeToFile(fileName3);
+
+    //Controlling if boards solved or not
+   for(int i=0;i<Puzzle::AbstractClass::getNumberOfBoards();i++){
+       if(absPtr[i]->isSolved()){
+            cout << i << " index board is solved" << endl;
+       }else{
+           cout << i << " index board is not solved" << endl;
+       }
+   }
+
+    //Controlling if any of
+    for(int i=0;i<Puzzle::AbstractClass::getNumberOfBoards();i++){
+        for(int j = i+1; j<Puzzle::AbstractClass::getNumberOfBoards();j++){
+            if(*absPtr[j] == *absPtr[i]){
+                cout << i << " index equal to " << j << " index." << endl;
+            }else{
+                cout << i << " index not equal to " << j << " index." << endl;
             }
         }
-        final.setSize(size);        //create finalboard
+    }
+    //we can send how many boards we want to compare to the function.
+    //we can use Puzzle::AbstractClass::getNumberOfBoards() to compare all boards created so far.
+    if(isValid(absPtr,3)){
+        cout << "Board sequence is valid"<< endl;
     }else{
-        for (int i = 0; i < 3; ++i) {
-            absPtr[i]->readFromFile(argv[1]);
-        }
-        final.readFromFile(argv[1]);
-        final.reset();
+        cout << "Board sequence is not valid"<< endl;
     }
-    while (decission != 'Q' && decission != 'q' && index < 3) {
-        for (int i = 0; i < 3; ++i) {
-            absPtr[i]->print();
-            cout << "\n";
-        }
-
-        cout << "Please select one of the selection below:" << "\n";
-        cout << "U,u->Moves up." << "\n";
-        cout << "D,d->Moves down" << "\n";
-        cout << "L,l->Moves left" << "\n";
-        cout << "R,r->Moves right" << "\n";
-        cout << "I,i->Moves intelligent" << "\n";
-        cout << "E,e->Asks a file name and saves the current board \n"
-                "configuration as a loadable shape file.." << "\n";
-        cout << "O,o->Asks a file name and loads the current board "
-                "configuration from the shape file." << "\n";
-        cout << "Q,q->Quit from the game" << "\n\n\n\n";
-        cout << "Selection:";
-        cin >> decission;
-         if (decission == 'E' || decission == 'e') {
-             absPtr[index]->writeToFile();
-        } else if (decission == 'O' || decission == 'o') {
-            std::string nameOfFile;
-            cout << "Please enter name of file: ";
-            cin >> nameOfFile;
-            nameOfFile = nameOfFile + ".txt";
-            char *cstr = new char[nameOfFile.length() + 1];
-            strcpy(cstr, nameOfFile.c_str());
-             for (int i = 0; i < 3; ++i) {
-                 absPtr[i]->readFromFile(cstr);
-             }
-            delete [] cstr;
-        } else if (decission == 'Q' || decission == 'q') {
-            return 0;
-        } else {
-             for (int i = index; i < 3; ++i) {
-                 absPtr[i]->move(decission);
-             }
-        }
-        index++;
-    }
-    cout << isValid(absPtr,3);
+    
 }

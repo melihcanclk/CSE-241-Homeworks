@@ -30,6 +30,13 @@ void BoardVector::readFromFile(char *argv){
         string pString;
         calculateXandY(argv,coordinates);
         setSize(coordinates);
+        for (int i = 0; i < coordinates[1]; i++) {
+            for (int j = 0; j < coordinates[0]; j++) {
+                infile >> pString;
+                vctr[i][j] = convertStringToInt(pString);
+            }
+        }
+
 }
 
 const int &BoardVector::operator()(int x,int y)const { /*rvalue*/

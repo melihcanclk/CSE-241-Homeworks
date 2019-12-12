@@ -30,6 +30,10 @@ void BoardArray1D::readFromFile(char *argv){
     string pString;
     calculateXandY(argv,coordinates);
     setSize(coordinates);
+    for (int i = 0; i < coordinates[1] * coordinates[0]; i++) {
+        infile >> pString;
+        arr[i] = convertStringToInt(pString);
+    }
 }
 
 const int &BoardArray1D::operator()(int x,int y)const { /*rvalue*/

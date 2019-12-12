@@ -1,26 +1,31 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include "AbstractClass.h"
 using namespace std;
 using namespace Puzzle;
 
 bool isValid(AbstractClass ** pAbstractClass,int size){                          //global function
     int j=0;
+    const int DIFFERENT_SIZE = 1000;
     for(int i=0;i< size -1;i++){
         /*if(!( pAbstractClass[i]->isSolved() )){
             return false;
         }*/
         int diff = AbstractClass::findDiff(pAbstractClass[i],pAbstractClass[i+1]);
-        if( diff != 1  && diff != -1){
+        if( diff == 1  || diff == -1){
+            return true;
+        }if(diff == DIFFERENT_SIZE){
+            cout << i << " index board and " << i+1 << " index board have different size"<< endl;
             return false;
         }
     }
-    return true;
+    return false;
 }
 
 
 AbstractClass::AbstractClass(){
-    //AbstractClass::numberOfBoards++;
+    AbstractClass::numberOfBoards++;
 }
 void AbstractClass::setSize(int coordinates[2]){
     this->size[0] = coordinates[0];
@@ -55,31 +60,29 @@ void AbstractClass::print(){
         cout << "\n";
     }
 }
-void AbstractClass::readFromFile(char *argv){
-    int coordinates[2],k=0;
-        ifstream infile(argv);
-        if(!infile.is_open()){
-            cout << "File couldn't be open." << "\n";
-        }
-        string pString;
-        calculateXandY(argv,coordinates);
-        
-}
 
-void AbstractClass::writeToFile() {
-    string name;
-    cout << "Enter name of txt file:";
-    cin >> name;
-    name = name + ".txt";
-    ofstream onfile(name);
+void AbstractClass::writeToFile(char * filename) {
+    ofstream onfile(filename);
     for (int i = 0; i < size[1]; i++) {
         for (int j = 0; j < size[0]; j++) {
-            if((*this)(i,j) == -1) {
+            if(size[0] * size[1] <= 100){
+                if((*this)(j,i) == -1) {
                 onfile << "bb";
-            }else if((*this)(i,j) / 10 == 0) {
-                onfile << "0" << (*this)(i,j);
-            }else if((*this)(i,j) / 10 >= 1){
-                onfile << (*this)(i,j);
+                }else if((*this)(j,i) / 10 == 0) {
+                    onfile << "0" << (*this)(j,i);
+                }else if((*this)(j,i) / 10 >= 1 ){
+                    onfile << (*this)(j,i);
+                }
+            }else if (size[0] * size[1] > 100 && size[0] * size[1] <= 1000){
+                if((*this)(j,i) == -1) {
+                    onfile << "bb";
+                }else if((*this)(j,i) / 10 == 0) {
+                    onfile << "00" << (*this)(j,i);
+                }else if((*this)(j,i) / 100 == 0 ){
+                    onfile << "0" <<(*this)(j,i);
+                }else if((*this)(j,i) / 100 >= 1 ){
+                    onfile << (*this)(j,i);
+                }
             }
             if(j+1 != size[0]){
                 onfile << " ";
@@ -90,9 +93,9 @@ void AbstractClass::writeToFile() {
         }
     }
 }
-/*int AbstractClass::getNumberOfBoards(){
+int AbstractClass::getNumberOfBoards(){
     return numberOfBoards;
-}*/
+}
 char AbstractClass::getLastMove(){
     return lastMove;
 }
@@ -122,8 +125,8 @@ void AbstractClass::calculateXandY(string argv,int coordinates[2]){
         }
         counterForY++;
     }
-    coordinates[0] = (counterForX / counterForY) +1;
-    coordinates[1] = counterForY;
+    size[0] = coordinates[0] = (counterForX / counterForY) +1;
+    size[1] = coordinates[1] = counterForY;
 }
 
 
@@ -202,6 +205,9 @@ void AbstractClass::findCoordinates(int number,int coordinates[2])const {
 }
 
 int AbstractClass::findDiff(AbstractClass *left, AbstractClass *right) {
+    if(left->size[0] != right->size[0] || left->size[1] != right->size[1]){
+        return 1000;
+    }
     int EMPTY = -1,coordinatesleft[2],coordinatesright[2];
     left->findCoordinates(EMPTY,coordinatesleft);
     right->findCoordinates(EMPTY,coordinatesright);
@@ -219,17 +225,6 @@ void AbstractClass::reset(){
         }
 
     }
-}
-
-
-char AbstractClass::moveRandom(){
-    int moveTo;
-    moveTo = rand()%4;
-    while(!this->isValid(convertMoveIntToChar(moveTo))){
-        moveTo = rand()%4;
-    }
-    move(convertMoveIntToChar(moveTo));
-    return convertMoveIntToChar(moveTo);
 }
 
 bool AbstractClass::operator==(const AbstractClass & right){
@@ -260,4 +255,14 @@ bool AbstractClass::isSolved()  {
         }
     }
     return true;
+}
+
+int AbstractClass::convertStringToInt(string str) {
+    if(str == "bb" || str == "bbb"){
+        return -1;
+    }
+    int convertedNumber = 0;
+    stringstream streamString(str);
+    streamString >> convertedNumber;
+    return convertedNumber;
 }

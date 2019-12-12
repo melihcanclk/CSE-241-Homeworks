@@ -1,6 +1,5 @@
 #ifndef BOARDARRAY1D_H
 #define BOARDARRAY1D_H
-
 #include "AbstractClass.h"
 
 class BoardArray1D : public Puzzle::AbstractClass{
@@ -13,7 +12,7 @@ class BoardArray1D : public Puzzle::AbstractClass{
         int & operator()(int index1,int index2)override;
         ~BoardArray1D();
     private:
-     int * arr{};
+     int * arr;
 };
 
 
