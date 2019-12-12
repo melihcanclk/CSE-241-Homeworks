@@ -20,14 +20,14 @@ int main(int argc,char **argv){
     srand(time(nullptr));
     if(argc == 1){
         int size[2] = {0,0};
-        while(size[0]<3 && size[1] < 3){
+        //while(size[0]<3 && size[1] < 3){
             cout << "Please enter x size of your NPuzzle: ";
             cin >> size[0];
             cout << endl;
             cout << "Please enter y size of your NPuzzle: ";
             cin >> size[1];
             cout << endl;
-        }
+        //}
         for (int i = 0; i < 3; ++i) {
             absPtr[i]->setSize(size);
         }

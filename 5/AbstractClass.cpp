@@ -31,12 +31,24 @@ void AbstractClass::print(){
     for (int i = 0; i < size[1]; i++){
         for (int j = 0; j < size[0]; j++) {
             int index = (*this)(j,i);
-            if(index == -1) {           
-                cout << "bb";
-            }else if(index / 10 == 0) {
-                cout << "0" << index;  
-            }else if(index/ 10 >= 1){          
-                cout << index;
+            if(size[0] * size[1] <= 100){
+                if(index == -1) {
+                    cout << "bb";
+                }else if(index / 10 == 0) {
+                    cout << "0" << index;
+                }else if(index/ 10 >= 1){
+                    cout << index;
+                }
+            }else if (size[0] * size[1] > 100 && size[0] * size[1] <= 1000){
+                if(index == -1) {
+                    cout << "bb ";
+                }else if(index / 10 == 0) {
+                    cout << "00" << index;
+                }else if(index / 100 == 0) {
+                    cout << "0" << index;
+                }else if(index/ 100 >= 1){
+                    cout << index;
+                }
             }
             cout << " ";
         }
