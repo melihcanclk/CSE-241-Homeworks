@@ -1,11 +1,12 @@
-a.out:main.o GTUContainer.o
-	g++ main.o GTUContainer.o -o a.out 
+a.out: GTUSet.o GTUVector.o main.o  
+	g++  GTUSet.o GTUVector.o main.o -o a.out 
 
 main.o:main.cpp
 	g++ -c main.cpp
 
-GTUContainer.o: GTUContainer.h GTUContainer.cpp 
-	g++ -c GTUContainer.cpp
+
+GTUVector.o: GTUVector.h GTUVector.cpp 
+	g++ -c GTUVector.cpp
 
 clean:
 	rm *.o a.out

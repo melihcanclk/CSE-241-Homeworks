@@ -5,3 +5,11 @@
 5/.idea
 
 5/CMakeLists.txt
+
+6/.vscode/
+
+6/cmake-build-debug
+
+6/.idea
+
+6/CMakeLists.txt
