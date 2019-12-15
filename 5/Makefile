@@ -16,4 +16,4 @@ BoardVector.o:BoardVector.cpp BoardVector.h
 	g++ -c BoardVector.cpp
 
 clean:
-	rm *.o hw1
+	rm *.o a.out
