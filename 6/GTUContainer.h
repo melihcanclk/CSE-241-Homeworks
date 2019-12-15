@@ -2,15 +2,17 @@
 #define GTUCONTAINER_H
 #include <iostream>
 #include <memory> 
+#include <iterator>
 
-template <class T> 
 class GTUContainer { 
-    private: 
-        std::shared_ptr <T> ptr;
-        int size; 
     public: 
-        GTUContainer(T arr[], int s); 
-        void print(); 
+        virtual bool empty() = 0;
+        virtual int size() = 0;
+        virtual int max_size() = 0;
+        virtual void insert() = 0;
+        virtual void erase() = 0;
+        virtual void clear() = 0;
+        virtual void begin() = 0;
 }; 
 
 #endif
