@@ -3,7 +3,7 @@
 #include "GTUContainer.h"
 
 template <class T>
-class GTUVector : public GTUContainer {
+class GTUVector : public GTUContainer <T>{
     public:
 
     private:
