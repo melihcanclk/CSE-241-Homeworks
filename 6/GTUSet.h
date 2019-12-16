@@ -11,13 +11,13 @@ class GTUSet : public GTUContainer <T> {
         GTUSet(){}
         bool empty()override;
         void insert(T inserted)override ;
-        int getsize();                      //getter for size of set
+        int size()override;
         int getCapacity();
         T& operator[](int index);               //Make work easy
     private:
         std::shared_ptr< T > sp;        //array deleter will be add
         int capacity = 1;
-        int size = 0;
+        int size_ = 0;
         const T operator[](int index)const;     //Make work easy
 
         bool contains(T value);
@@ -47,7 +47,7 @@ T& GTUSet<T>::operator[](int index)  {
 
 template<typename T>
 bool GTUSet<T>::contains(T value) {
-    for(int i = 0;i<size;i++) {
+    for(int i = 0;i<size_;i++) {
         if((*this)[i] == value) {
             return true;
         }
@@ -62,19 +62,23 @@ void GTUSet<T>::insertSorted(int size, T numberInserted) {
         (*this)[i + 1] = (*this)[i];
 
     (*this)[i + 1] = numberInserted;
-    this->size++;
+    this->size_++;
 }
 
 template<typename T> 
 bool GTUSet<T>::empty() {
-    return size == 0;
+    return size_ == 0;
+}
+
+template<class T> int GTUSet<T>::size(){
+    return size_;
 }
 
 template<class T>
-void GTUSet<T>::insert(T inserted) {        //Küçükten büyüğe bakma
+void GTUSet<T>::insert(T inserted) { 
     if (contains(inserted))
         return;
-    if (size >= capacity) {
+    if (size_ >= capacity) { 
         capacity *= 2;
         std::shared_ptr< T > spcopy(new T[capacity], std::default_delete<T[]>());
         for(int i = 0;i< capacity / 2 ; i++){
@@ -82,17 +86,12 @@ void GTUSet<T>::insert(T inserted) {        //Küçükten büyüğe bakma
         }
         sp = spcopy;
     }
-    insertSorted(size,inserted);
+    insertSorted(size_,inserted);
 }
 
 template<class T>
 int GTUSet<T>::getCapacity() {        //Küçükten büyüğe bakma
     return capacity;
-}
-
-template<class T>
-int GTUSet<T>::getsize() {        //Küçükten büyüğe bakma
-    return size;
 }
 
 #endif
