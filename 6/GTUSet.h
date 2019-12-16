@@ -12,8 +12,8 @@ class GTUSet : public GTUContainer <T> {
         bool empty()override;
         void insert(T inserted)override ;
         int size()override;
-        int getCapacity();
-        T& operator[](int index);               //Make work easy
+        int max_size()override;
+        T& operator[](int index);               //Make work easy this will be private
     private:
         std::shared_ptr< T > sp;        //array deleter will be add
         int capacity = 1;
@@ -70,8 +70,13 @@ bool GTUSet<T>::empty() {
     return size_ == 0;
 }
 
-template<class T> int GTUSet<T>::size(){
+template<class T> 
+int GTUSet<T>::size(){
     return size_;
+}
+template<class T> 
+int GTUSet<T>::max_size(){
+    return capacity;
 }
 
 template<class T>
@@ -87,11 +92,6 @@ void GTUSet<T>::insert(T inserted) {
         sp = spcopy;
     }
     insertSorted(size_,inserted);
-}
-
-template<class T>
-int GTUSet<T>::getCapacity() {        //Küçükten büyüğe bakma
-    return capacity;
 }
 
 #endif
