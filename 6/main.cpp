@@ -1,9 +1,9 @@
 #include "GTUSet.h"
 #include "GTUVector.h"
-#include <iostream> 
-using namespace std; 
+#include <iostream>
+using namespace std;
 
-int main() { 
+int main() {
     GTUSet <int> a(3);
     cout << a.empty() << endl;
     a.insert(3);
@@ -32,5 +32,5 @@ int main() {
         cout << a[i] ;
     }
     cout << endl;
-    return 0; 
-} 
+    return 0;
+}
