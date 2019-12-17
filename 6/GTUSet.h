@@ -2,6 +2,7 @@
 #define GTUSET_H
 #include "GTUContainer.h"
 #include <iostream>
+#include <fstream>
 #include <memory>
 
 template <class T>
@@ -13,9 +14,10 @@ class GTUSet : public GTUContainer <T> {
         void insert(T inserted)override ;
         int size()override;
         int max_size()override;
-        T& operator[](int index);               //Make work easy this will be private
-    private:
         std::shared_ptr< T > sp;        //array deleter will be add
+
+    private:
+        T& operator[](int index);               //Make work easy this will be private
         int capacity = 1;
         int size_ = 0;
         const T operator[](int index)const;     //Make work easy
@@ -35,9 +37,7 @@ GTUSet<T>::GTUSet(int size) {
 }
 template<typename T> 
 const T GTUSet<T>::operator[](int index) const{
-    if(index < 0 || index >= size){
-        exit(0);
-    }
+    throw(index < 0 || index >= size);
     return sp.get()[index];
 }
 template<typename T> 
@@ -94,4 +94,38 @@ void GTUSet<T>::insert(T inserted) {
     insertSorted(size_,inserted);
 }
 
+
 #endif
+
+
+
+
+/*class GTUIterator{
+            public:
+                GTUIterator(){}
+                GTUIterator(std::shared_ptr< T > sp_) : iter(sp_){}
+                GTUIterator operator =(std::shared_ptr< T> x){
+                    iter = x;
+                    return (*this);
+                }
+                friend std::ostream & operator <<(std::ostream & outputStream, GTUIterator x) {
+                    std::cout << **x ;
+                    return outputStream;
+                }
+                std::shared_ptr<T>& operator *(){
+                    return iter;
+                }
+                std::shared_ptr<T>& operator ->(){
+                    return *iter;
+                }
+                GTUIterator operator ++(){
+                    iter++;
+                    return *this;
+                }
+            public:
+                std::shared_ptr<T> iter;
+        };
+        GTUIterator begin() {
+            GTUIterator x = sp.get();
+            return(GTUIterator(x));
+        }*/

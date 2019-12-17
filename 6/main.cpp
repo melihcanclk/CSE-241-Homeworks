@@ -1,36 +1,20 @@
 #include "GTUSet.h"
 #include "GTUVector.h"
 #include <iostream>
+#include <memory>
 using namespace std;
 
 int main() {
-    GTUSet <int> a(3);
-    cout << a.empty() << endl;
-    a.insert(3);
-    cout << a.empty() << endl;
-    for (int i = 0 ; i < a.getCapacity();i++){
-        cout << a[i] ;
+    GTUSet <int> a(5);
+    for(int i = 0;i< a.max_size();i++){
+        cout << a.sp.get()[i];
     }
-    cout << endl;
-    a.insert(2);
-    for (int i = 0 ; i < a.getCapacity();i++){
-        cout << a[i] ;
+    cout << "\n";
+    a.insert(4);
+    a.insert(44);
+    a.insert(56);
+    for(int i = 0;i< a.max_size();i++){
+        cout << a.sp.get()[i];
     }
-    cout << endl;
-    a.insert(1);
-    for (int i = 0 ; i < a.getCapacity();i++){
-        cout << a[i] ;
-    }
-    cout << endl;
-    a.insert(7);
-    for (int i = 0 ; i < a.getCapacity();i++){
-        cout << a[i] ;
-    }
-    cout << endl;
-    a.insert(8);
-    for (int i = 0 ; i < a.getCapacity();i++){
-        cout << a[i] ;
-    }
-    cout << endl;
     return 0;
 }
