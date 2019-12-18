@@ -1,25 +1,18 @@
 #include "GTUSet.h"
-#include "GTUVector.h"
 #include <iostream>
-#include <vector>
-#include <memory>
-using namespace std;
 
-int main() {
-   /* GTUSet <int> a(5);
-    for(int i = 0;i< a.max_size();i++){
-        cout << a.sp.get()[i];
+int main()
+{
+    GTUSet<double> point3d(3);
+    point3d.insert(3);
+    point3d.insert(7);
+    point3d.insert(10);
+
+    for(GTUSet<double>::iterator i = point3d.begin(); i != point3d.end(); i++)
+    {
+        std::cout << *i << " ";
     }
-    cout << "\n";
-    a.insert(4);
-    a.insert(44);
-    a.insert(56);
-    for(int i = 0;i< a.max_size();i++){
-        cout << a.sp.get()[i];
-    }*/
-    vector<int> x{1,2,3,4,5,6};
-    vector<int>::iterator a = x.begin();
-    cout << *(a++) ;
-    cout << *(a++) ;
+
+    std::cout << std::endl;
     return 0;
 }
