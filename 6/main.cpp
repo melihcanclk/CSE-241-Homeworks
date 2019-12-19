@@ -3,12 +3,13 @@
 
 int main()
 {
-    GTUSet<double> point3d(3);
-    point3d.insert(3);
-    point3d.insert(7);
-    point3d.insert(10);
+    GTUSet<double> arr(3);
+    arr.insert(3);
+    arr.insert(7);
+    arr.insert(10);
+    arr.insert(19);
 
-    for(GTUSet<double>::iterator i = point3d.begin(); i != point3d.end(); i++)
+    for(GTUSet<double>::iterator i = arr.begin(); i != arr.end(); i++)
     {
         std::cout << *i << " ";
     }
