@@ -16,61 +16,64 @@ class GTUSet : public GTUContainer<T>
         int size()override;
         int max_size()override;
 
-        class iterator
+        class GTUIterator
         {
             public:
-                iterator(T* ptr) : ptr_(ptr) { }
-                iterator operator++() { iterator i = *this; ptr_++; return i; }
-                iterator operator++(int junk) { ptr_++; return *this; }
-                T& operator*() { return *ptr_; }
-                T* operator->() { return ptr_; }
-                bool operator==(const iterator & rhs) { return ptr_ == rhs.ptr_; }
-                bool operator!=(const iterator & rhs) { return ptr_ != rhs.ptr_; }
+                GTUIterator() { }
+                GTUIterator(std::shared_ptr<T> ptr) : ptr_(ptr) { }
+                GTUIterator(T* ptr) : ptr_(ptr) { }
+                GTUIterator operator++() { return GTUIterator(ptr_.get() + 1); }
+            //GTUIterator operator++(int junk) { sp.get()++; return *this; }
+                std::shared_ptr<T> operator*() { return ptr_; }
+                std::shared_ptr<T> operator->() { return ptr_; }
+                bool operator==(const GTUIterator & rhs) { return ptr_ == rhs.ptr_; }
+                bool operator!=(const GTUIterator & rhs) { return ptr_ != rhs.ptr_; }
             private:
-                T* ptr_;
+                std::shared_ptr<T> ptr_;
         };
 
-        class const_iterator
+        class GTUIteratorConst
         {
             public:
-                typedef std::forward_iterator_tag iterator_category;
-                const_iterator(T* ptr) : ptr_(ptr) { }
-                const_iterator operator++() { const_iterator i = *this; ptr_++; return i; }
-                const_iterator operator++(int junk) { ptr_++; return *this; }
+                GTUIteratorConst(T* ptr) : ptr_(ptr) { }
+                GTUIteratorConst operator++() { GTUIteratorConst i = *this; ptr_++; return i; }
+                GTUIteratorConst operator++(int junk) { ptr_++; return *this; }
                 const T& operator*() { return *ptr_; }
                 const T* operator->() { return ptr_; }
-                bool operator==(const const_iterator& rhs) { return ptr_ == rhs.ptr_; }
-                bool operator!=(const const_iterator& rhs) { return ptr_ != rhs.ptr_; }
+                bool operator==(const GTUIteratorConst& rhs) { return ptr_ == rhs.ptr_; }
+                bool operator!=(const GTUIteratorConst& rhs) { return ptr_ != rhs.ptr_; }
             private:
                 T* ptr_;
         };
 
-        iterator begin()
+        GTUIterator begin()
         {
-            return iterator(sp.get());
+            return GTUIterator(sp.get());
         }
 
-        iterator end()
+        GTUIterator end()
         {
-            return iterator(sp.get() + size_);
+            return GTUIterator( sp.get()+ size_-1);
+
         }
 
-        const_iterator begin() const
+        GTUIteratorConst begin() const
         {
-            return const_iterator(sp.get());
+            return GTUIteratorConst(sp.get());
         }
 
-        const_iterator end() const
+        GTUIteratorConst end() const
         {
-            return const_iterator(sp.get() + size_);
+            return GTUIteratorConst(sp.get() + size_);
         }
-
+T& operator[](int index);
+const T operator[](int index)const;     //Make work easy
     private:
         std::shared_ptr<T> sp;
-        T& operator[](int index);               //Make work easy this will be private
+                       //Make work easy this will be private
         int capacity = 1;
         int size_ = 0;
-        const T operator[](int index)const;     //Make work easy
+        
         bool contains(T value);
   
       void insertSorted(int size, T numberInserted);
@@ -84,7 +87,6 @@ GTUSet<T>::GTUSet(int size) {
     } 
     std::shared_ptr< T > spcopy(new T[capacity], std::default_delete<T[]>());
     sp = spcopy;
-    std::cout << "constructor called" << std::endl;
 }
 template<typename T> 
 const T GTUSet<T>::operator[](int index) const{
