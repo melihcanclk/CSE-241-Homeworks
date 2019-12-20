@@ -5,6 +5,9 @@
 #include <cassert>
 #include "GTUContainer.h"
 
+template<typename T>
+void Deleter( T* ptr);
+
 template <typename T>
 class GTUSet : public GTUContainer<T>
 {
@@ -15,20 +18,35 @@ class GTUSet : public GTUContainer<T>
         void insert(T inserted)override ;
         int size()override;
         int max_size()override;
-
+        ~GTUSet(){
+        }
+        
         class GTUIterator
         {
             public:
                 GTUIterator() { }
-                GTUIterator(std::shared_ptr<T> ptr) : ptr_(ptr) { }
-                GTUIterator(T* ptr) : ptr_(ptr) { }
-                GTUIterator operator++() { return GTUIterator(ptr_.get() + 1); }
-            //GTUIterator operator++(int junk) { sp.get()++; return *this; }
-                std::shared_ptr<T> operator*() { return ptr_; }
+                GTUIterator(std::shared_ptr<T> ptr);
+                GTUIterator(T* ptr) : ptr_(ptr){
+                }
+                    
+                GTUIterator operator++() { 
+                    GTUIterator *x= new GTUIterator(ptr_.get() + 1) ;
+                    std::swap(this->ptr_,x->ptr_);
+                    return *this;
+                }
+                GTUIterator operator++(int junk) {
+
+                    GTUIterator *x= new GTUIterator(ptr_.get() + 1) ;
+                    std::swap(this->ptr_,x->ptr_);
+                    return *this;
+                }
+                std::shared_ptr<T>& operator*() { return ptr_; }
                 std::shared_ptr<T> operator->() { return ptr_; }
                 bool operator==(const GTUIterator & rhs) { return ptr_ == rhs.ptr_; }
                 bool operator!=(const GTUIterator & rhs) { return ptr_ != rhs.ptr_; }
+                
             private:
+                
                 std::shared_ptr<T> ptr_;
         };
 
@@ -48,12 +66,14 @@ class GTUSet : public GTUContainer<T>
 
         GTUIterator begin()
         {
-            return GTUIterator(sp.get());
+            GTUIterator *x = new GTUIterator( sp.get());
+            return *x;
         }
 
         GTUIterator end()
         {
-            return GTUIterator( sp.get()+ size_-1);
+            auto x = new GTUIterator( sp.get()+ size_ );
+            return *x;
 
         }
 
@@ -66,10 +86,11 @@ class GTUSet : public GTUContainer<T>
         {
             return GTUIteratorConst(sp.get() + size_);
         }
-T& operator[](int index);
-const T operator[](int index)const;     //Make work easy
-    private:
         std::shared_ptr<T> sp;
+        T& operator[](int index);
+        const T operator[](int index)const;     //Make work easy
+    private:
+        
                        //Make work easy this will be private
         int capacity = 1;
         int size_ = 0;
@@ -145,4 +166,19 @@ void GTUSet<T>::insert(T inserted) {
         sp = spcopy;
     }
     insertSorted(size_,inserted);
+}
+
+
+template<class T> 
+GTUSet<T>::GTUIterator::GTUIterator(std::shared_ptr<T> ptr) : ptr_(ptr)
+{
+}
+
+template<class T> 
+void Deleter(T *ptr)
+{
+    ptr->deleteMe();
+    // And make sure YOU ACTUALLY DELETE (or do whatever else you need to
+    // do to release the resource)
+    delete ptr;
 }
