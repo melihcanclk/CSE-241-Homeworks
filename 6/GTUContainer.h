@@ -7,7 +7,7 @@ template <class T>
 class GTUContainer
 {
 public:
-    GTUContainer() //constructor of that GTUSet
+    GTUContainer() //constructor of that GTUContainer
     {
         head = std::make_shared<Node<T>>();
         tail = head;
