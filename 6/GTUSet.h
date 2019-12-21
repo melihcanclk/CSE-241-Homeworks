@@ -28,6 +28,14 @@ private:
     {
         return std::make_shared<Node<T>>(value);
     }
+    
+    void add_node(T value)
+    {
+
+        tail->add_next(value);
+        tail->prev = tail;
+        tail = tail->next;
+    }
 
 public:
     GTUSet()
@@ -44,19 +52,11 @@ public:
     GTUIterator<T> end() override
     {
         auto current = head->next;
-        while (current->next != nullptr)
+        while (current != nullptr)
         {
             current = current->next;
         }
         return GTUIterator<T>(current);
-    }
-
-    void add_node(T value)
-    {
-
-        tail->add_next(value);
-        tail->prev = tail;
-        tail = tail->next;
     }
 
     void print()

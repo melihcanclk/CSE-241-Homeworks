@@ -10,8 +10,7 @@ int main()
     {
         l.insert(i);
     }
-    iter = l.begin();
-    for(;iter != l.end();iter++){
+    for(iter = l.begin();iter != l.end();++iter){
         std::cout << (**iter);
     }
     std::cout << std::endl;
