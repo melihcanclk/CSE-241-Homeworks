@@ -11,8 +11,8 @@ class GTUContainer {
         virtual int size() = 0;
         virtual int max_size() = 0;
         virtual void insert(T inserted) = 0;
-       /* virtual void erase() = 0;
-        virtual void clear() = 0; */
+        virtual void erase(GTUIterator<T> iter) = 0;
+        virtual void clear() = 0;
         virtual GTUIterator<T> begin() = 0;
         virtual GTUIterator<T> end() = 0;
        

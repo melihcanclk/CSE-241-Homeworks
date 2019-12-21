@@ -1,6 +1,6 @@
 #include "GTUSet.h"
 #include <iostream>
-
+//for loop'da son eleman basmıyor
 int main()
 {
     GTUSet<int> l; // initialize the linked list
@@ -11,15 +11,14 @@ int main()
         l.insert(i);
     }
     iter = l.begin();
-    std::cout << (**iter) << std::endl;
-    iter++;
-    std::cout << (**iter) << std::endl;
-    iter = l.end();
-    std::cout << (**iter) << std::endl;
+    for(;iter != l.end();iter++){
+        std::cout << (**iter);
+    }
+    std::cout << std::endl;
     iter--;
-    std::cout << (**iter) << std::endl;
-    l.insert(17);
+    l.erase(iter);
     l.print();
+    l.clear();
     l.insert(0);
     l.print();
     return 0;

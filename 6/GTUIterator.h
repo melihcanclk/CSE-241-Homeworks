@@ -40,9 +40,8 @@ public:
     std::shared_ptr<T> *operator->() { return ptr_; }
     bool operator==(const GTUIterator &other) { return ptr_ == other.ptr_; }
     bool operator!=(const GTUIterator &other) { return ptr_ != other.ptr_; }
-
-protected:
     std::shared_ptr<Node<T>> ptr_;
+    
 };
 
 template <class T>

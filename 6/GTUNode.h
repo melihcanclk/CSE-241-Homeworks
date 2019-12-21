@@ -16,6 +16,8 @@ struct Node
     std::shared_ptr<Node<T>> add_next(T value)
     {
         next = std::make_shared<Node<T>>(value);
+        next->next = nullptr;
+        next->prev = nullptr;
         return next;
     }
 };

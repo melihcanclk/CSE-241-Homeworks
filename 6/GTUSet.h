@@ -24,6 +24,10 @@ private:
         }
         return false;
     }
+    std::shared_ptr<Node<T>> create_node(T value)
+    {
+        return std::make_shared<Node<T>>(value);
+    }
 
 public:
     GTUSet()
@@ -39,7 +43,7 @@ public:
 
     GTUIterator<T> end() override
     {
-        auto current = head;
+        auto current = head->next;
         while (current->next != nullptr)
         {
             current = current->next;
@@ -109,6 +113,26 @@ public:
             current = current->next;
         }
     }
+
+    void erase(GTUIterator<T> iter) override
+    {
+        GTUIterator<T> temp1 = --iter;
+        iter++;
+
+        if (iter.ptr_.get()->next == nullptr)
+        {
+            temp1.ptr_.get()->next = nullptr;
+        }
+        else
+        {
+            temp1.ptr_.get()->next = iter.ptr_.get()->next;
+        }
+    }
+    void clear() override
+    {
+        head->next = nullptr;
+    }
+
     bool empty() override
     {
         if (head == tail)
@@ -160,10 +184,6 @@ public:
         }
     }
 
-    std::shared_ptr<Node<T>> create_node(T value)
-    {
-        return std::make_shared<Node<T>>(value);
-    }
 };
 
 template <typename T>
