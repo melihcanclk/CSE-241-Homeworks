@@ -9,4 +9,4 @@ GTUVector.o: GTUVector.h GTUVector.cpp
 	g++ -c GTUVector.cpp
 
 clean:
-	rm *.o a.out
+	rm *.o GTUSet main a.out
