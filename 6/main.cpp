@@ -1,7 +1,5 @@
 #include "GTUSet.h"
 #include <iostream>
-#include <vector>
-#include <iterator>
 
 int main()
 {
@@ -16,8 +14,11 @@ int main()
         std::cout << (**iter);
     }
     std::cout << std::endl;
-     std::cout << (**iter);
     l.insert(0);
-    l.print();
+    for(iter = l.begin();iter != nullptr;iter++){
+        std::cout << (**iter);
+    }
+    iter++;
+    std::cout << (**iter) << std::endl;
     return 0;
 }

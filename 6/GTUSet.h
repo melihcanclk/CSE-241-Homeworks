@@ -3,19 +3,16 @@
 #include "GTUContainer.h"
 #include "GTUIterator.h"
 #include <iostream>
-#include <fstream>
 #include <memory>
 
 template <class T>
 class GTUSet : public GTUContainer<T>
 {
 private:
-    std::shared_ptr<Node<T>> head;
-    std::shared_ptr<Node<T>> tail;
-
+    
     bool isContain(T value)
     {
-        auto current = head;
+        auto current = GTUContainer<T>::head;
         while (current != nullptr)
         {
             if (current->value == value)
@@ -30,34 +27,16 @@ private:
     {
         return std::make_shared<Node<T>>(value);
     }
-public:
-    GTUSet()
-    { //constructor of that GTUSet
-        head = std::make_shared<Node<T>>();
-        tail = head;
-    }
 
+public:
     GTUIterator<T> begin() override
     {
-        return GTUIterator<T>(head.get()->next);
+        return GTUIterator<T>(GTUContainer<T>::head.get()->next);
     }
 
     GTUIterator<T> end() override
     {
-        return GTUIterator<T>(tail);
-    }
-
-    void print()
-    {
-        std::cout << std::string(100, '-') << '\n';
-        auto current = head->next;
-        while (current != nullptr)
-        {
-            std::cout << current->value << '\t';
-            current = current->next;
-        }
-        std::cout << '\n'
-                  << std::string(100, '-') << '\n';
+        return GTUIterator<T>(GTUContainer<T>::tail);
     }
 
     /*void reverse()
@@ -76,7 +55,7 @@ public:
 
     void insert(T value) override
     {
-        auto current = head;
+        auto current = GTUContainer<T>::head;
         while (current != nullptr && !isContain(value))
         {
             if (current->next == nullptr || current->next->value > value)
@@ -88,7 +67,7 @@ public:
                     node->prev = current;
                     current->next = node;
                     current->end = false;
-                    tail = node;
+                    GTUContainer<T>::tail = node;
                 }
                 else //diğer case'ler
 
@@ -99,7 +78,7 @@ public:
                     node->next = temp_next;
                     current->next = node;
                     node = temp_next->prev;
-                    tail = node;
+                    GTUContainer<T>::tail = node;
                 }
             }
             current = current->next;
@@ -122,12 +101,12 @@ public:
     }
     void clear() override
     {
-        head->next = nullptr;
+        GTUContainer<T>::head->next = nullptr;
     }
 
     bool empty() override
     {
-        if (head == tail)
+        if (GTUContainer<T>::head == GTUContainer<T>::tail)
         {
             return true;
         }
@@ -139,7 +118,7 @@ public:
 
     int size() override
     {
-        auto current = head;
+        auto current = GTUContainer<T>::head;
         int counter = 0;
         while (current->next != nullptr)
         {
@@ -158,30 +137,6 @@ public:
         }
         return x;
     }
-
-    void insert_before(T before_value, T value)
-    {
-        auto current = head;
-        std::shared_ptr<Node<T>> prev;
-        while (current != nullptr)
-        {
-            if (current->value == before_value)
-            {
-                auto node = create_node(value);
-                node->next = current;
-                prev->next = node;
-            }
-            prev = current;
-            current = current->next;
-        }
-    }
-
 };
 
-template <typename T>
-std::ostream &operator<<(std::ostream &os, Node<T> other) //print content of Node<T>
-{
-    std::cout << other.value;
-    return os;
-}
 #endif
