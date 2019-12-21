@@ -1,3 +1,5 @@
+#ifndef GTUSET_H
+#define GTUSET_H
 #include "GTUContainer.h"
 #include "GTUIterator.h"
 #include <iostream>
@@ -28,15 +30,6 @@ private:
     {
         return std::make_shared<Node<T>>(value);
     }
-    
-    void add_node(T value)
-    {
-
-        tail->add_next(value);
-        tail->prev = tail;
-        tail = tail->next;
-    }
-
 public:
     GTUSet()
     { //constructor of that GTUSet
@@ -51,12 +44,7 @@ public:
 
     GTUIterator<T> end() override
     {
-        auto current = head->next;
-        while (current != nullptr)
-        {
-            current = current->next;
-        }
-        return GTUIterator<T>(current);
+        return GTUIterator<T>(tail);
     }
 
     void print()
@@ -96,8 +84,11 @@ public:
                 if (current->next == nullptr) //eğer ilk veya son node'a ekleme yapılacaksa
                 {
                     auto node = create_node(value);
+                    node->next = nullptr;
                     node->prev = current;
                     current->next = node;
+                    current->end = false;
+                    tail = node;
                 }
                 else //diğer case'ler
 
@@ -108,6 +99,7 @@ public:
                     node->next = temp_next;
                     current->next = node;
                     node = temp_next->prev;
+                    tail = node;
                 }
             }
             current = current->next;
@@ -192,3 +184,4 @@ std::ostream &operator<<(std::ostream &os, Node<T> other) //print content of Nod
     std::cout << other.value;
     return os;
 }
+#endif
