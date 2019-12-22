@@ -52,7 +52,7 @@ public:
         head = prev;
     }*/
 
-    void insert(T value) override
+    void insert(T value) 
     {
         auto current = GTUContainer<T>::head;
         while (current != nullptr && !isContain(value))
@@ -65,10 +65,18 @@ public:
                 node->next = temp_next;
                 current->next->prev = node;
                 current->next = node;
-                
             }
             current = current->next;
         }
+    }
+    void insert(GTUIterator<T> iter, T value) override
+    {
+        auto node = create_node(value);
+        iter.ptr_.get()->next->prev= node;
+        iter.ptr_.get()->next = node;
+        node->prev = iter.ptr_;
+        node->next = iter.ptr_.get()->next;
+        iter = iter.ptr_.get()->next;
     }
 
     void erase(GTUIterator<T> iter) override
@@ -99,21 +107,14 @@ public:
 
     bool empty() override
     {
-        if (GTUContainer<T>::head == GTUContainer<T>::tail)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return GTUContainer<T>::head->next == GTUContainer<T>::tail;
     }
 
     int size() override
     {
         auto current = GTUContainer<T>::head;
         int counter = 0;
-        while (current->next != nullptr)
+        while (current->next != GTUContainer<T>::tail)
         {
             ++counter;
             current = current->next;

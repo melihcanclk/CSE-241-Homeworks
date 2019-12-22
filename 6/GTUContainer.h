@@ -19,7 +19,7 @@ public:
     virtual bool empty() = 0;
     virtual int size() = 0;
     virtual int max_size() = 0;
-    virtual void insert(T inserted) = 0;
+    virtual void insert(GTUIterator<T> iter,T inserted) = 0;
     virtual void erase(GTUIterator<T> iter) = 0;
     virtual void clear() = 0;
     virtual GTUIterator<T> begin() = 0;
@@ -44,7 +44,7 @@ public:
 template <typename T>
 std::ostream &operator<<(std::ostream &os, Node<T> other) //friend function for print content of Node<T>
 {
-    if(other.value == -1 && other.end == true){         //if node doesn't show last node
+    if(other.value == 0 && other.end == true && other.head == true){         //if node doesn't show last node
     }else{
         std::cout << other.value;
     }

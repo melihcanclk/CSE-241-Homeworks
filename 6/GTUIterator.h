@@ -47,7 +47,7 @@ public:
     }
     GTUIterator operator--() //prefix -- operator overload
     {
-       try
+        try
         {
             if (ptr_.get()->prev == nullptr)
             {
