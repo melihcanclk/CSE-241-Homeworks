@@ -9,7 +9,7 @@ template <class T>
 class GTUSet : public GTUContainer<T>
 {
 private:
-    bool isContain(T value)
+    bool isContain(T value)                     //control if GTUSet contains T value 
     {
         auto current = GTUContainer<T>::head;
         while (current != nullptr)
@@ -38,21 +38,7 @@ public:
         return GTUIterator<T>(GTUContainer<T>::tail);
     }
 
-    /*void reverse()
-    {
-        auto current = head;
-        std::shared_ptr<Node<T>> next, prev;
-        while (current != nullptr)
-        {
-            next = current->next;
-            current->next = prev;
-            prev = current;
-            current = next;
-        }
-        head = prev;
-    }*/
-
-    void insert(T value) 
+    void insert(T value)
     {
         auto current = GTUContainer<T>::head;
         while (current != nullptr && !isContain(value))
@@ -72,7 +58,7 @@ public:
     void insert(GTUIterator<T> iter, T value) override
     {
         auto node = create_node(value);
-        iter.ptr_.get()->next->prev= node;
+        iter.ptr_.get()->next->prev = node;
         iter.ptr_.get()->next = node;
         node->prev = iter.ptr_;
         node->next = iter.ptr_.get()->next;

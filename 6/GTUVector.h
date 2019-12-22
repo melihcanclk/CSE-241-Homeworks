@@ -26,12 +26,15 @@ public:
     }
     void insert(GTUIterator<T> iter, T value) override
     {
+        
         auto node = create_node(value);
         node->prev = iter.ptr_;
         node->next = iter.ptr_.get()->next;
-        iter.ptr_.get()->next->prev= node;
+        iter.ptr_.get()->next->prev = node;
         iter.ptr_.get()->next = node;
-
+        if(iter.ptr_ == GTUContainer<T>::head && iter.ptr_.get()->head == true){
+            GTUContainer<T>::head = GTUContainer<T>::head.get()->next;
+        }
     }
 
     void erase(GTUIterator<T> iter) override
@@ -76,7 +79,17 @@ public:
         }
         return x;
     }
+/*
+    const T operator[](int index) const
+    {
+        throw(index < 0 || index >= size());
+        return sp.get()[index];
+    }
     
+    T &operator[](int index)
+    {
+        return sp.get()[index];
+    }*/
 };
 
 #endif

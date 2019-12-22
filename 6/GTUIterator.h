@@ -80,10 +80,11 @@ public:
     }
     bool operator!=(std::nullptr_t nullp)
     {
-        return ptr_ != nullp;
+        return ptr_.get()->next != nullp;
     }
-    auto operator*() { return ptr_.get(); }
-    std::shared_ptr<T> *operator->() { return ptr_; }
+    
+    auto operator*() { return ptr_.get()->value; }
+    auto *operator->() { return ptr_; }
     bool operator==(const GTUIterator &other) { return ptr_ == other.ptr_; }
     bool operator!=(const GTUIterator &other) { return ptr_ != other.ptr_; }
     std::shared_ptr<Node<T>> ptr_;

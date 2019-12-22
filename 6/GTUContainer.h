@@ -41,13 +41,5 @@ public:
     std::shared_ptr<Node<T>> head;
     std::shared_ptr<Node<T>> tail;
 };
-template <typename T>
-std::ostream &operator<<(std::ostream &os, Node<T> other) //friend function for print content of Node<T>
-{
-    if(other.value == 0 && other.end == true && other.head == true){         //if node doesn't show last node
-    }else{
-        std::cout << other.value;
-    }
-    return os;
-}
+
 #endif
