@@ -11,7 +11,7 @@ struct Node
     std::shared_ptr<Node<T>> next;
     std::shared_ptr<Node<T>> prev;
 
-    Node() : head(true),end(true), value(-1){};                           // head with -1 value
+    Node() : head(true),end(true){};                           // head with -1 value
     Node(T value) : head(false),end(true), value(value), prev(nullptr){}; // node
 
     std::shared_ptr<Node<T>> add_next(T value)

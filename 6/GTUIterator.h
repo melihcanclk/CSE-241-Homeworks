@@ -14,44 +14,72 @@ public:
 
     GTUIterator operator++() //prefix ++ operator overload
     {
-        ptr_ = ptr_.get()->next;
-        return *this;
+        try
+        {
+            if (ptr_.get()->next == nullptr)
+            {
+                throw "Out of bound";
+            }
+            ptr_ = ptr_.get()->next;
+            return *this;
+        }
+        catch (const char *massage)
+        {
+            std::cerr << massage;
+        }
     }
     GTUIterator operator++(int junk) //postfix ++ operator overload
     {
-
-        auto x = new GTUIterator(ptr_);
-        ptr_ = ptr_.get()->next;
-        return *x;
+        try
+        {
+            auto x = new GTUIterator(ptr_);
+            if (ptr_.get()->next == nullptr)
+            {
+                throw "Out of bound";
+            }
+            ptr_ = ptr_.get()->next;
+            return *x;
+        }
+        catch (const char *massage)
+        {
+            std::cerr << massage;
+        }
     }
     GTUIterator operator--() //prefix -- operator overload
     {
-        ptr_ = ptr_.get()->prev;
-        return *this;
+       try
+        {
+            if (ptr_.get()->prev == nullptr)
+            {
+                throw "Out of bound";
+            }
+            ptr_ = ptr_.get()->prev;
+            return *this;
+        }
+        catch (const char *massage)
+        {
+            std::cerr << massage;
+        }
     }
     GTUIterator operator--(int junk) //postfix -- operator overload
     {
-        auto x = new GTUIterator(ptr_);
-        ptr_ = ptr_.get()->prev;
-        return *x;
+        try
+        {
+            auto x = new GTUIterator(ptr_);
+            if (ptr_.get()->prev == nullptr)
+            {
+                throw "Out of bound";
+            }
+            ptr_ = ptr_.get()->prev;
+            return *x;
+        }
+        catch (const char *massage)
+        {
+            std::cerr << massage;
+        }
     }
     bool operator!=(std::nullptr_t nullp)
     {
-        if (ptr_.get()->next == nullptr)            //eğer next null pointer ise
-        {
-            if (ptr_.get()->value == -1 && ptr_.get()->end == true)//eğer temporary bir node oluşturuldu ise
-            {
-                ptr_ = ptr_->prev;
-                return false;
-            }
-            else                                    //eğer temporary bir node oluşturulmadı ise
-            {
-                ptr_.get()->next = std::make_shared<Node<T>>();
-                ptr_.get()->next->next = nullp;
-                ptr_.get()->next->prev = ptr_;
-                ptr_.get()->end = false;
-            }
-        }
         return ptr_ != nullp;
     }
     auto operator*() { return ptr_.get(); }

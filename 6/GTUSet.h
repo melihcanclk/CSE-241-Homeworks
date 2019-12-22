@@ -9,7 +9,6 @@ template <class T>
 class GTUSet : public GTUContainer<T>
 {
 private:
-    
     bool isContain(T value)
     {
         auto current = GTUContainer<T>::head;
@@ -31,7 +30,7 @@ private:
 public:
     GTUIterator<T> begin() override
     {
-        return GTUIterator<T>(GTUContainer<T>::head.get()->next);
+        return GTUIterator<T>(GTUContainer<T>::head);
     }
 
     GTUIterator<T> end() override
@@ -58,28 +57,15 @@ public:
         auto current = GTUContainer<T>::head;
         while (current != nullptr && !isContain(value))
         {
-            if (current->next == nullptr || current->next->value > value)
+            if (current->next == GTUContainer<T>::tail || current->next->value > value)
             {
-                if (current->next == nullptr) //eğer ilk veya son node'a ekleme yapılacaksa
-                {
-                    auto node = create_node(value);
-                    node->next = nullptr;
-                    node->prev = current;
-                    current->next = node;
-                    current->end = false;
-                    GTUContainer<T>::tail = node;
-                }
-                else //diğer case'ler
-
-                {
-                    auto temp_next = current->next;
-                    auto node = create_node(value);
-                    node->prev = current;
-                    node->next = temp_next;
-                    current->next = node;
-                    node = temp_next->prev;
-                    GTUContainer<T>::tail = node;
-                }
+                auto temp_next = current->next;
+                auto node = create_node(value);
+                node->prev = current;
+                node->next = temp_next;
+                current->next->prev = node;
+                current->next = node;
+                
             }
             current = current->next;
         }
@@ -101,7 +87,14 @@ public:
     }
     void clear() override
     {
-        GTUContainer<T>::head->next = nullptr;
+        GTUContainer<T>::head.get()->next->prev = nullptr;
+        GTUContainer<T>::head.get()->next = nullptr;
+        GTUContainer<T>::tail.get()->prev->next = nullptr;
+        GTUContainer<T>::tail.get()->next = nullptr;
+        GTUContainer<T>::head.get()->next = GTUContainer<T>::tail;
+        GTUContainer<T>::head.get()->prev = nullptr;
+        GTUContainer<T>::tail.get()->next = nullptr;
+        GTUContainer<T>::tail.get()->prev = GTUContainer<T>::head;
     }
 
     bool empty() override

@@ -10,7 +10,11 @@ public:
     GTUContainer() //constructor of that GTUSet
     {
         head = std::make_shared<Node<T>>();
-        tail = head;
+        tail = std::make_shared<Node<T>>();
+        head.get()->next = tail;
+        head.get()->prev = nullptr;
+        tail.get()->next = nullptr;
+        tail.get()->prev = head;
     }
     virtual bool empty() = 0;
     virtual int size() = 0;
