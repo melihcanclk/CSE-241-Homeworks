@@ -11,7 +11,7 @@ class GTUSet : public GTUContainer<T>
 private:
     bool isContain(T value)                     //control if GTUSet contains T value 
     {
-        auto current = GTUContainer<T>::head;
+        std::shared_ptr<Node<T> > current = GTUContainer<T>::head;
         while (current != nullptr)
         {
             if (current->value == value)
@@ -40,13 +40,13 @@ public:
 
     void insert(T value)
     {
-        auto current = GTUContainer<T>::head;
+        std::shared_ptr<Node<T> > current = GTUContainer<T>::head;
         while (current != nullptr && !isContain(value))
         {
             if (current->next == GTUContainer<T>::tail || current->next->value > value)
             {
-                auto temp_next = current->next;
-                auto node = create_node(value);
+                std::shared_ptr<Node<T> > temp_next = current->next;
+                std::shared_ptr<Node<T> > node = create_node(value);
                 node->prev = current;
                 node->next = temp_next;
                 current->next->prev = node;
@@ -57,7 +57,7 @@ public:
     }
     void insert(GTUIterator<T> iter, T value) override
     {
-        auto node = create_node(value);
+        std::shared_ptr<Node<T> > node = create_node(value);
         iter.ptr_.get()->next->prev = node;
         iter.ptr_.get()->next = node;
         node->prev = iter.ptr_;
@@ -98,7 +98,7 @@ public:
 
     int size() override
     {
-        auto current = GTUContainer<T>::head;
+        std::shared_ptr<Node<T> > current = GTUContainer<T>::head;
         int counter = 0;
         while (current->next != GTUContainer<T>::tail)
         {

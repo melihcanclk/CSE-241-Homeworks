@@ -28,7 +28,7 @@ public:
     void print()
     {
         std::cout << std::string(100, '-') << '\n';
-        auto current = head->next;
+        std::shared_ptr<Node<T> > current = head->next;
         while (current != nullptr)
         {
             std::cout << current->value << '\t';

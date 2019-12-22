@@ -32,7 +32,7 @@ public:
     {
         try
         {
-            auto x = new GTUIterator(ptr_);
+            GTUIterator<T>* x = new GTUIterator(ptr_);
             if (ptr_.get()->next == nullptr)
             {
                 throw "Out of bound";
@@ -65,7 +65,7 @@ public:
     {
         try
         {
-            auto x = new GTUIterator(ptr_);
+            GTUIterator<T> *x = new GTUIterator(ptr_);
             if (ptr_.get()->prev == nullptr)
             {
                 throw "Out of bound";
@@ -83,8 +83,8 @@ public:
         return ptr_.get()->next != nullp;
     }
     
-    auto operator*() { return ptr_.get()->value; }
-    auto *operator->() { return ptr_; }
+    T operator*() { return ptr_.get()->value; }
+    T *operator->() { return *(ptr_.get()->value); }
     bool operator==(const GTUIterator &other) { return ptr_ == other.ptr_; }
     bool operator!=(const GTUIterator &other) { return ptr_ != other.ptr_; }
     std::shared_ptr<Node<T>> ptr_;

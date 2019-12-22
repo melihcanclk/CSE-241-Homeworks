@@ -26,13 +26,14 @@ public:
     }
     void insert(GTUIterator<T> iter, T value) override
     {
-        
-        auto node = create_node(value);
+
+        std::shared_ptr<Node<T> > node = create_node(value);
         node->prev = iter.ptr_;
         node->next = iter.ptr_.get()->next;
         iter.ptr_.get()->next->prev = node;
         iter.ptr_.get()->next = node;
-        if(iter.ptr_ == GTUContainer<T>::head && iter.ptr_.get()->head == true){
+        if (iter.ptr_ == GTUContainer<T>::head && iter.ptr_.get()->head == true)
+        {
             GTUContainer<T>::head = GTUContainer<T>::head.get()->next;
         }
     }
@@ -60,14 +61,14 @@ public:
 
     int size() override
     {
-        auto current = GTUContainer<T>::head;
+        std::shared_ptr<Node<T> > current = GTUContainer<T>::head;
         int counter = 0;
         while (current->next != GTUContainer<T>::tail)
         {
             ++counter;
             current = current->next;
         }
-        return counter;
+        return counter + 1;
     }
 
     int max_size() override
@@ -79,17 +80,45 @@ public:
         }
         return x;
     }
-/*
-    const T operator[](int index) const
+
+    T operator[](int index)
     {
-        throw(index < 0 || index >= size());
-        return sp.get()[index];
+        try
+        {
+            std::shared_ptr<Node<T> > current = GTUContainer<T>::head;
+            const int _size = size();
+            if (index < 0 || index > _size)
+                throw "Index problem";
+            for (int i = 0; i < index; i++)
+            {
+                current = current->next;
+            }
+            return current.get()->value;
+        }
+        catch (const char *message)
+        {
+            std::cerr << message << std::endl;
+        }
     }
-    
-    T &operator[](int index)
+    const T operator[](int index)const
     {
-        return sp.get()[index];
-    }*/
+        try
+        {
+            std::shared_ptr<Node<T> > current = GTUContainer<T>::head;
+            const int _size = size();
+            if (index < 0 || index > _size)
+                throw "Index problem";
+            for (int i = 0; i < index; i++)
+            {
+                current = current->next;
+            }
+            return current.get()->value;
+        }
+        catch (const char *message)
+        {
+            std::cerr << message << std::endl;
+        }
+    }
 };
 
 #endif

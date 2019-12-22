@@ -49,8 +49,7 @@ int main()
 
     std::cout << "-----------------------------------------------------------------------------------------------------" << std::endl;
     GTUVector<int> vectorforint;
-    GTUIterator<int> itervector;
-    itervector = vectorforint.begin();
+    GTUIterator<int> itervector = vectorforint.begin();
     for (int i = 0; i<10; i++)
     {
         vectorforint.insert(itervector, i);
@@ -64,5 +63,9 @@ int main()
         std::cout << (*itervector);
     }
     std::cout << std::endl;
+    for (int i = 0; i<vectorforint.size(); i++)
+    {
+        std::cout << vectorforint[i];
+    }
     return 0;
 }
