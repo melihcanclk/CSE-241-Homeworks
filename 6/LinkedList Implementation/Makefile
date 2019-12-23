@@ -7,5 +7,5 @@ main.o:main.cpp
 GTUNode.o:GTUNode.cpp
 	g++ -c GTUNode.cpp
 
-clean:
+clear:
 	rm *.o GTUSet main a.out
