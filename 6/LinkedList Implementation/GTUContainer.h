@@ -25,18 +25,6 @@ public:
     virtual GTUIterator<T> begin() = 0;
     virtual GTUIterator<T> end() = 0;
 
-    void print()
-    {
-        std::cout << std::string(100, '-') << '\n';
-        std::shared_ptr<Node<T> > current = head->next;
-        while (current != nullptr)
-        {
-            std::cout << current->value << '\t';
-            current = current->next;
-        }
-        std::cout << '\n'
-                  << std::string(100, '-') << '\n';
-    }
     protected:
     std::shared_ptr<Node<T>> head;
     std::shared_ptr<Node<T>> tail;
