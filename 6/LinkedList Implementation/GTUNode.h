@@ -2,6 +2,8 @@
 #define GTUNODE_H
 #include <iostream>
 #include <memory>
+namespace STLGTUNode
+{
 template <typename T>
 struct Node
 {
@@ -11,8 +13,8 @@ struct Node
     std::shared_ptr<Node<T>> next;
     std::shared_ptr<Node<T>> prev;
 
-    Node() : head(true),end(true){};                           
-    Node(T value) : head(false),end(false), prev(nullptr),next(nullptr){this->value = value;}; // node
+    Node() : head(true), end(true){};
+    Node(T value) : head(false), end(false), prev(nullptr), next(nullptr) { this->value = value; }; // node
 
     std::shared_ptr<Node<T>> add_next(T value)
     {
@@ -22,5 +24,6 @@ struct Node
         return next;
     }
 };
+} // namespace STLGTUNode
 
 #endif

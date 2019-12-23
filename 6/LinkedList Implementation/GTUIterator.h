@@ -5,6 +5,8 @@
 #include <iostream>
 #include <memory>
 
+using namespace STLGTUNode;
+
 template <class T>
 class GTUIterator
 {
