@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-namespace STLGTUIterator
+namespace STLGTUContainer
 {
 template <class T>
 class GTUIterator

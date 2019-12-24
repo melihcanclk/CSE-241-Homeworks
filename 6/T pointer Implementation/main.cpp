@@ -2,13 +2,54 @@
 #include "GTUVector.h"
 #include <iostream>
 using namespace std;
+using namespace STLGTUContainer;
 
-void printSet(STLGTUSet::GTUSet<double> setForDouble);
-void printVector(STLGTUVector::GTUVector<int> vectorForInt);
+void printSet(GTUSet<double> setForDouble);
+void printVector(GTUVector<int> vectorForInt);
 
+bool isDevidedIntoThree(int i){
+    return i%3 ==0;
+}
+
+template<typename T>
+void print (T i) {  
+  std::cout << i << ' ' ;
+}
+
+template <typename T>
+GTUIterator<double> find(GTUIterator<double> first, GTUIterator<double> last, T input){
+    for (GTUIterator<double> i = first; i != last; i++)
+    {
+        if(*i == input){
+            return i;
+        }
+    }
+    return last;
+}
+
+template <typename T>
+GTUIterator<T> find_if(GTUIterator<T> first, GTUIterator<T> last,bool (*f)(T)){
+    for (GTUIterator<T> i = first; i != last; i++)
+    {
+        if((*f)(*i)){
+            return i;
+        }
+    }
+    return last;
+}
+
+template <typename T>
+GTUIterator<T> for_each(GTUIterator<T> first, GTUIterator<T> last, void (*f)(T)){
+    
+    for (GTUIterator<T> i = first; i != last; i++)
+    {
+        (*f)(*i);
+    }
+
+}
 int main()
 {
-    STLGTUSet::GTUSet<double> setForDouble(3); //How to create array of GTUset pointers
+    GTUSet<double> setForDouble(3); //How to create array of GTUset pointers
     setForDouble.insert(5.6);
     setForDouble.insert(7.7);
     setForDouble.insert(10.9);
@@ -17,6 +58,18 @@ int main()
     printSet(setForDouble);
     setForDouble.insert(95.12);
     printSet(setForDouble);
+    std::cout << "Finding if 10.9 is in the set or not " << std::endl;
+    find(setForDouble.begin(),setForDouble.end(),95.12) == setForDouble.end() ? std::cout << "Not in the set" : std::cout << "In the set" ;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Finding if 85.4 is in the set or not " << std::endl;
+    find(setForDouble.begin(),setForDouble.end(),85.4) == setForDouble.end() ? std::cout << "Not in the set" : std::cout << "In the set" ;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Printing all elements of set by using for_each function" << std::endl;
+    for_each(setForDouble.begin(),setForDouble.end(),print);
+    std::cout << std::endl;
+    std::cout << std::endl;
     GTUIterator<double> i = setForDouble.begin();
     i++;
     setForDouble.erase(i);
@@ -37,7 +90,7 @@ int main()
     printSet(setForDouble);
 
     cout << "----------------------------------------------------\n";
-    STLGTUVector::GTUVector<int> vectorForInt(3); //How to create array of GTUset pointers
+    GTUVector<int> vectorForInt(3); //How to create array of GTUset pointers
     GTUIterator<int> iter = vectorForInt.begin();
     vectorForInt.insert(iter, 6);
     iter++;
@@ -48,8 +101,17 @@ int main()
     vectorForInt.insert(iter, 123);
     printVector(vectorForInt);
     iter++;
-    vectorForInt.insert(iter, 554);
+    std::cout << "First element of that vector that can be devided into three is ";
+    std::cout << *(find_if(vectorForInt.begin(),vectorForInt.end(),isDevidedIntoThree));
+    std::cout << std::endl;
+    std::cout << std::endl;
+    iter = vectorForInt.begin();
+    vectorForInt.insert(iter, 3);
     printVector(vectorForInt);
+    std::cout << "First element of that vector that can be devided into three is ";
+    std::cout << *(find_if(vectorForInt.begin(),vectorForInt.end(),isDevidedIntoThree));
+    std::cout << std::endl;
+    std::cout << std::endl;
     iter++;
     vectorForInt.insert(iter, 66);
     printVector(vectorForInt);
@@ -78,7 +140,10 @@ int main()
     return 0;
 }
 
-void printSet(STLGTUSet::GTUSet<double> setForDouble)
+
+
+
+void printSet(GTUSet<double> setForDouble)
 {
     //cout << "Beginning of the set is " << *(setForDouble.begin()) << endl;
     cout << "Size of setForDouble is " << setForDouble.size() << endl;
@@ -91,7 +156,7 @@ void printSet(STLGTUSet::GTUSet<double> setForDouble)
     std::cout << std::endl;
     std::cout << std::endl;
 }
-void printVector(STLGTUVector::GTUVector<int> vectorForInt)
+void printVector(GTUVector<int> vectorForInt)
 {
     cout << "Beginning of the vector is " << *(vectorForInt.begin()) << endl;
     cout << "Size of vectorForInt is " << vectorForInt.size() << endl;

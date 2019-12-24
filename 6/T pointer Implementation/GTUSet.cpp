@@ -1,5 +1,5 @@
 #include "GTUSet.h"
-namespace STLGTUSet
+namespace STLGTUContainer
 {
 // this has left blank intentionally
 // because implementations require

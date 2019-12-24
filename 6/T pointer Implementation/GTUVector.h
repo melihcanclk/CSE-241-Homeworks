@@ -3,9 +3,9 @@
 #include "GTUContainer.h"
 
 using namespace STLGTUContainer;
-using namespace STLGTUIterator;
 
-namespace STLGTUVector
+
+namespace STLGTUContainer
 {
 template <typename T>
 class GTUVector : public GTUContainer<T>
@@ -34,7 +34,7 @@ private:
 } // namespace STLGTUVector
 
 template <typename T>
-STLGTUVector::GTUVector<T>::GTUVector(int size)
+GTUVector<T>::GTUVector(int size)
 {
     while (size > capacity)
     {
@@ -44,36 +44,36 @@ STLGTUVector::GTUVector<T>::GTUVector(int size)
     sp = spcopy;
 }
 template <typename T>
-const T STLGTUVector::GTUVector<T>::operator[](int index) const //for my own good
+const T GTUVector<T>::operator[](int index) const //for my own good
 {
     throw(index < 0 || index >= size);
     return sp.get()[index];
 }
 template <typename T>
-T &STLGTUVector::GTUVector<T>::operator[](int index) //for my own good
+T &GTUVector<T>::operator[](int index) //for my own good
 {
     return sp.get()[index];
 }
 
 template <typename T>
-bool STLGTUVector::GTUVector<T>::empty()
+bool GTUVector<T>::empty()
 {
     return size_ == 0;
 }
 
 template <class T>
-int STLGTUVector::GTUVector<T>::size()
+int GTUVector<T>::size()
 {
     return size_;
 }
 template <class T>
-int STLGTUVector::GTUVector<T>::max_size()
+int GTUVector<T>::max_size()
 {
     return capacity;
 }
 
 template <class T>
-void STLGTUVector::GTUVector<T>::insert(GTUIterator<T> &iter, T inserted)
+void GTUVector<T>::insert(GTUIterator<T> &iter, T inserted)
 {
 
     int index = 0;
@@ -105,7 +105,7 @@ void STLGTUVector::GTUVector<T>::insert(GTUIterator<T> &iter, T inserted)
 }
 
 template <class T>
-void STLGTUVector::GTUVector<T>::erase(GTUIterator<T> iter)
+void GTUVector<T>::erase(GTUIterator<T> iter)
 {
     bool isAlreadyInserted = false;
     for (auto iter_temp = this->begin(); iter_temp != this->end(); ++iter_temp)
@@ -126,29 +126,29 @@ void STLGTUVector::GTUVector<T>::erase(GTUIterator<T> iter)
 }
 
 template <class T>
-void STLGTUVector::GTUVector<T>::clear()
+void GTUVector<T>::clear()
 {
     this->sp = nullptr;
     *this = GTUVector(0);
 }
 
 template <class T>
-GTUIterator<T> STLGTUVector::GTUVector<T>::begin()
+GTUIterator<T> GTUVector<T>::begin()
 {
     return GTUIterator<T>(sp.get());
 }
 template <class T>
-GTUIterator<T> STLGTUVector::GTUVector<T>::end()
+GTUIterator<T> GTUVector<T>::end()
 {
     return GTUIterator<T>(sp.get() + size_);
 }
 template <class T>
-GTUIteratorConst<T> STLGTUVector::GTUVector<T>::begin() const
+GTUIteratorConst<T> GTUVector<T>::begin() const
 {
     return GTUIteratorConst<T>(sp.get());
 }
 template <class T>
-GTUIteratorConst<T> STLGTUVector::GTUVector<T>::end() const
+GTUIteratorConst<T> GTUVector<T>::end() const
 {
     return GTUIteratorConst<T>(sp.get() + size_);
 }

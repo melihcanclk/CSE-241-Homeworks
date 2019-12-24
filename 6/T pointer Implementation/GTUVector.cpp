@@ -1,6 +1,6 @@
 #include "GTUVector.h"
 
-namespace STLGTUVector
+namespace STLGTUContainer
 {
 // this has left blank intentionally
 // because implementations require

@@ -3,8 +3,8 @@
 #include "GTUContainer.h"
 
 using namespace STLGTUContainer;
-using namespace STLGTUIterator;
-namespace STLGTUSet
+
+namespace STLGTUContainer
 {
 template <typename T>
 class GTUSet : public STLGTUContainer::GTUContainer<T>
@@ -37,7 +37,7 @@ private:
 } // namespace STLGTUSet
 
 template <typename T>
-STLGTUSet::GTUSet<T>::GTUSet(int size)
+GTUSet<T>::GTUSet(int size)
 {
     while (size > capacity)
     {
@@ -47,19 +47,19 @@ STLGTUSet::GTUSet<T>::GTUSet(int size)
     sp = spcopy;
 }
 template <typename T>
-const T STLGTUSet::GTUSet<T>::operator[](int index) const //for my own good
+const T GTUSet<T>::operator[](int index) const //for my own good
 {
     throw(index < 0 || index >= size);
     return sp.get()[index];
 }
 template <typename T>
-T &STLGTUSet::GTUSet<T>::operator[](int index) //for my own good
+T &GTUSet<T>::operator[](int index) //for my own good
 {
     return sp.get()[index];
 }
 
 template <typename T>
-bool STLGTUSet::GTUSet<T>::contains(T value)
+bool GTUSet<T>::contains(T value)
 {
     for (int i = 0; i < size_; i++)
     {
@@ -72,7 +72,7 @@ bool STLGTUSet::GTUSet<T>::contains(T value)
 }
 
 template <typename T>
-void STLGTUSet::GTUSet<T>::insertSorted(int size, T numberInserted)
+void GTUSet<T>::insertSorted(int size, T numberInserted)
 {
     int i;
     for (i = size - 1; (i >= 0 && (*this)[i] > numberInserted); i--)
@@ -83,24 +83,24 @@ void STLGTUSet::GTUSet<T>::insertSorted(int size, T numberInserted)
 }
 
 template <typename T>
-bool STLGTUSet::GTUSet<T>::empty()
+bool GTUSet<T>::empty()
 {
     return size_ == 0;
 }
 
 template <class T>
-int STLGTUSet::GTUSet<T>::size()
+int GTUSet<T>::size()
 {
     return size_;
 }
 template <class T>
-int STLGTUSet::GTUSet<T>::max_size()
+int GTUSet<T>::max_size()
 {
     return capacity;
 }
 
 template <class T>
-void STLGTUSet::GTUSet<T>::insert(T inserted)
+void GTUSet<T>::insert(T inserted)
 {
     try
     {
@@ -125,7 +125,7 @@ void STLGTUSet::GTUSet<T>::insert(T inserted)
     }
 }
 template <class T>
-void STLGTUSet::GTUSet<T>::insert(GTUIterator<T> &iter, T inserted)
+void GTUSet<T>::insert(GTUIterator<T> &iter, T inserted)
 {
 
     try
@@ -166,7 +166,7 @@ void STLGTUSet::GTUSet<T>::insert(GTUIterator<T> &iter, T inserted)
 }
 
 template <class T>
-void STLGTUSet::GTUSet<T>::erase(GTUIterator<T> iter)
+void GTUSet<T>::erase(GTUIterator<T> iter)
 {
     bool isAlreadyInserted = false;
     for (auto iter_temp = this->begin(); iter_temp != this->end(); ++iter_temp)
@@ -187,29 +187,29 @@ void STLGTUSet::GTUSet<T>::erase(GTUIterator<T> iter)
 }
 
 template <class T>
-void STLGTUSet::GTUSet<T>::clear()
+void GTUSet<T>::clear()
 {
     this->sp = nullptr;
     *this = GTUSet(0);
 }
 
 template <class T>
-GTUIterator<T> STLGTUSet::GTUSet<T>::begin()
+GTUIterator<T> GTUSet<T>::begin()
 {
     return GTUIterator<T>(sp.get());
 }
 template <class T>
-GTUIterator<T> STLGTUSet::GTUSet<T>::end()
+GTUIterator<T> GTUSet<T>::end()
 {
     return GTUIterator<T>(sp.get() + size_);
 }
 template <class T>
-GTUIteratorConst<T> STLGTUSet::GTUSet<T>::begin() const
+GTUIteratorConst<T> GTUSet<T>::begin() const
 {
     return GTUIteratorConst<T>(sp.get());
 }
 template <class T>
-GTUIteratorConst<T> STLGTUSet::GTUSet<T>::end() const
+GTUIteratorConst<T> GTUSet<T>::end() const
 {
     return GTUIteratorConst<T>(sp.get() + size_);
 }
