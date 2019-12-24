@@ -9,7 +9,7 @@ void printSet(GTUSet<T> setForDouble);
 template<typename T>
 void printVector(GTUVector<T> vectorForInt);
 
-bool isDevidedIntoThree(int i){
+bool isDeviderIntoThree(int i){
     return i%3 ==0;
 }
 
@@ -40,9 +40,7 @@ GTUIterator<T> find_if(GTUIterator<T> first, GTUIterator<T> last,bool (*f)(T)){
         if((*f)(*i)){
             return i;
         }
-    }
-    return last;
-}
+    }material theme
 
 template <typename T>
 GTUIterator<T> for_each(GTUIterator<T> first, GTUIterator<T> last, void (*f)(T)){
@@ -55,7 +53,7 @@ GTUIterator<T> for_each(GTUIterator<T> first, GTUIterator<T> last, void (*f)(T))
 }
 int main()
 {
-    GTUSet<double> setForDouble(3); //How to create array of GTUset pointers
+    GTUSet<double> setForDouble(3); //How to create array of GTUSet pointers
     setForDouble.insert(5.6);
     setForDouble.insert(7.7);
     setForDouble.insert(10.9);
@@ -96,7 +94,7 @@ int main()
     printSet(setForDouble);
 
     cout << "----------------------------------------------------\n";
-    GTUVector<int> vectorForInt(3); //How to create array of GTUset pointers
+    GTUVector<int> vectorForInt(3); //How to create array of GTUVector pointers
     GTUIterator<int> iter = vectorForInt.begin();
     vectorForInt.insert(iter, 6);
     iter++;
@@ -107,15 +105,15 @@ int main()
     vectorForInt.insert(iter, 123);
     printVector(vectorForInt);
     iter++;
-    std::cout << "First element of that vector that can be devided into three is ";
-    std::cout << *(find_if(vectorForInt.begin(),vectorForInt.end(),isDevidedIntoThree));
+    std::cout << "First element of that vector that can be devider into three is ";
+    std::cout << *(find_if(vectorForInt.begin(),vectorForInt.end(),isDeviderIntoThree));
     std::cout << std::endl;
     std::cout << std::endl;
     iter = vectorForInt.begin();
     vectorForInt.insert(iter, 3);
     printVector(vectorForInt);
-    std::cout << "First element of that vector that can be devided into three is ";
-    std::cout << *(find_if(vectorForInt.begin(),vectorForInt.end(),isDevidedIntoThree));
+    std::cout << "First element of that vector that can be devider into three is ";
+    std::cout << *(find_if(vectorForInt.begin(),vectorForInt.end(),isDeviderIntoThree));
     std::cout << std::endl;
     std::cout << std::endl;
     iter++;
