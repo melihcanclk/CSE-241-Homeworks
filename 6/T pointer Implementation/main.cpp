@@ -4,11 +4,17 @@
 using namespace std;
 using namespace STLGTUContainer;
 
-void printSet(GTUSet<double> setForDouble);
-void printVector(GTUVector<int> vectorForInt);
+template<typename T>
+void printSet(GTUSet<T> setForDouble);
+template<typename T>
+void printVector(GTUVector<T> vectorForInt);
 
 bool isDevidedIntoThree(int i){
     return i%3 ==0;
+}
+
+bool isSumGreatherThan30(int i){
+    return i>30;
 }
 
 template<typename T>
@@ -17,7 +23,7 @@ void print (T i) {
 }
 
 template <typename T>
-GTUIterator<double> find(GTUIterator<double> first, GTUIterator<double> last, T input){
+GTUIterator<T> find(GTUIterator<T> first, GTUIterator<T> last, T input){
     for (GTUIterator<double> i = first; i != last; i++)
     {
         if(*i == input){
@@ -140,29 +146,29 @@ int main()
     return 0;
 }
 
-
-
-
-void printSet(GTUSet<double> setForDouble)
+template <typename T>
+void printSet(GTUSet<T> setForDouble)
 {
     //cout << "Beginning of the set is " << *(setForDouble.begin()) << endl;
     cout << "Size of setForDouble is " << setForDouble.size() << endl;
     cout << "MaxSize of setForDouble is " << setForDouble.max_size() << endl;
     cout << "Empty of setForDouble is " << setForDouble.empty() << endl;
-    for (GTUIterator<double> i = setForDouble.begin(); i != setForDouble.end(); i++)
+    for (GTUIterator<T> i = setForDouble.begin(); i != setForDouble.end(); i++)
     {
         std::cout << *i << " ";
     }
     std::cout << std::endl;
     std::cout << std::endl;
 }
-void printVector(GTUVector<int> vectorForInt)
+
+template <typename T>
+void printVector(GTUVector<T> vectorForInt)
 {
     cout << "Beginning of the vector is " << *(vectorForInt.begin()) << endl;
     cout << "Size of vectorForInt is " << vectorForInt.size() << endl;
     cout << "MaxSize of vectorForInt is " << vectorForInt.max_size() << endl;
     cout << "Empty of vectorForInt is " << vectorForInt.empty() << endl;
-    for (GTUIterator<int> iter = vectorForInt.begin(); iter != vectorForInt.end(); iter++)
+    for (GTUIterator<T> iter = vectorForInt.begin(); iter != vectorForInt.end(); iter++)
     {
         std::cout << *iter << " ";
     }
