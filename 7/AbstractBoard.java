@@ -32,11 +32,9 @@ public class AbstractBoard {
 
     }
 
-    public void reset() {
-    }
+    public void reset() {}
 
-    public void readFromFile(String nameOfFile) {
-    }
+    public void readFromFile(String nameOfFile) {}
 
     public void writeToFile(String nameOfFile) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -56,9 +54,7 @@ public class AbstractBoard {
         fileWriter.close();
     }
 
-    public boolean move(final char direction) {
-        return false; // empty
-    }
+    public void move(final char direction) {}
 
     public void stringAppend(int index, StringBuilder sb) {
         if (size[0] * size[1] <= 100) {

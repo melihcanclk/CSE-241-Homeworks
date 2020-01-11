@@ -64,7 +64,7 @@ public class BoardArray2D extends AbstractBoard {
 	}
 
 	@Override
-	public boolean move(final char direction) {
+	public void move(final char direction) {
 		int temp, x, y;
 		x = coordinatesOfSpace[0];
 		y = coordinatesOfSpace[1];
@@ -74,38 +74,28 @@ public class BoardArray2D extends AbstractBoard {
 				arr[y][x - 1] = arr[y][x];
 				arr[y][x] = temp;
 				coordinatesOfSpace[0]--;
-			} else {
-				return false;
-			}
+			} 
 		} else if (direction == 'R' || direction == 'r') {
 			if (isValid('R')) {
 				temp = arr[y][x + 1];
 				arr[y][x + 1] = arr[y][x];
 				arr[y][x] = temp;
 				coordinatesOfSpace[0]++;
-			} else {
-				return false;
-			}
+			} 
 		} else if (direction == 'U' || direction == 'u') {
 			if (isValid('U')) {
 				temp = arr[y - 1][x];
 				arr[y - 1][x] = arr[y][x];
 				arr[y][x] = temp;
 				coordinatesOfSpace[1]--;
-			} else {
-				return false;
-			}
+			} 
 		} else if (direction == 'D' || direction == 'd') {
 			if (isValid('D')) {
 				temp = arr[y + 1][x];
 				arr[y + 1][x] = arr[y][x];
 				arr[y][x] = temp;
 				coordinatesOfSpace[1]++;
-			} else {
-				return false;
-			}
-		}
-		return true;
+			} 
+		}	
 	}
-
 }
