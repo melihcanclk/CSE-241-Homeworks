@@ -21,7 +21,7 @@ public class BoardArray1D extends AbstractBoard{
 	public int cell(int x, int y) {
 
 		try {
-			if (x >= 0 && x < size[0] && y >= 0 && y < size[1]) {
+			if (x >= 0 && x <= size[0] && y >= 0 && y <= size[1]) {
 				return arr[size[0] * y + x];
 			}
 		} catch (IndexOutOfBoundsException exception) {

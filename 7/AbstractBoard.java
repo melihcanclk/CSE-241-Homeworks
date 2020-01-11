@@ -114,19 +114,39 @@ public class AbstractBoard {
     public boolean isValid(final char direction) {
 
         if ((direction == 'L' || direction == 'l') && coordinatesOfSpace[0] - 1 >= 0
-                && cell(coordinatesOfSpace[0], coordinatesOfSpace[1] - 1) != 0) {
+                && cell(coordinatesOfSpace[0]-1, coordinatesOfSpace[1]) != 0) {
             return true;
         } else if ((direction == 'R' || direction == 'r') && coordinatesOfSpace[0] + 1 < size[0]
-                && cell(coordinatesOfSpace[0], coordinatesOfSpace[1] + 1) != 0) {
+                && cell(coordinatesOfSpace[0]+1, coordinatesOfSpace[1]) != 0) {
             return true;
         } else if ((direction == 'U' || direction == 'u') && coordinatesOfSpace[1] - 1 >= 0
-                && cell(coordinatesOfSpace[0] - 1, coordinatesOfSpace[1]) != 0) {
+                && cell(coordinatesOfSpace[0] , coordinatesOfSpace[1]- 1) != 0) {
             return true;
         } else if ((direction == 'D' || direction == 'd') && coordinatesOfSpace[1] + 1 < size[1]
-                && cell(coordinatesOfSpace[0] + 1, coordinatesOfSpace[1]) != 0) {
+                && cell(coordinatesOfSpace[0], coordinatesOfSpace[1] + 1) != 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean isSolved()  {
+        int index=1;
+        for(int i = 0; i < size[1]; ++i){
+            for(int j = 0; j < size[0]; ++j){
+                int a = cell(j,i);
+                if(index == a){}
+                else if(a == 0){
+                    index--;
+                }
+                else{
+                    if(i!= size[1]-1 || j != size[0] -1){
+                        return false;
+                    }
+                }
+                index++;
+            }
+        }
+        return true;
     }
 }

@@ -24,12 +24,11 @@ public class Main {
 		}*/
 		
 		int last = 2;
-		int i = 0;
 		String input = new String();
 		for(int x = 0;x<2;x++){
 			System.out.println(a[x]);
 		}
-		while (i < last) {
+		while (!a[0].isSolved()) {
 			input = scan.next();
 			
 			for(int x = 0;x<2;x++){
@@ -39,7 +38,6 @@ public class Main {
 				System.out.println(a[x]);
 			}
 			
-			i++;
 		}
 		try {
 			for(int x = 0;x<2;x++){
