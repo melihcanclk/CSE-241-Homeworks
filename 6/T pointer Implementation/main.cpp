@@ -1,3 +1,7 @@
+/*------------------GEBZE TECHNICAL UNIVERSITY---------------------*
+*                    Name : Melihcan Çilek                         *
+*                    Student Number : 1801042092                   *
+*------------------------------------------------------------------*/
 #include "GTUSet.h"
 #include "GTUVector.h"
 #include <iostream>
