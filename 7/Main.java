@@ -1,27 +1,52 @@
 import java.lang.System;
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
 
 	public static void main(String[] args) {
-		BoardArray2D puzzle = new BoardArray2D();
+		AbstractBoard [] a = new AbstractBoard[2];
+		a[0] = new BoardArray1D();
+		a[1] = new BoardArray2D();
 		Scanner scan = new Scanner(System.in);
-		if (/*args.length == 1*/true) {
-			puzzle.readFromFile("a.txt");
-		}/* else if(args.length == 0){
+		/*if (args.length == 1) {*/
+			for(int i = 0;i<2;i++){
+				a[i].readFromFile(/*args[0]*/"a.txt");
+			}
+			
+		/*} else if(args.length == 0){
 			int x = scan.nextInt();
 			int y = scan.nextInt();
-			puzzle = new BoardArray2D(y,x);
+			for(int i = 0;i<2;i++){
+				a[i].setSize(x,y);
+			}
+			
 		}*/
-		int last = 10;
+		
+		int last = 2;
 		int i = 0;
 		String input = new String();
-		System.out.println(puzzle);
+		for(int x = 0;x<2;x++){
+			System.out.println(a[x]);
+		}
 		while (i < last) {
 			input = scan.next();
-			puzzle.move(input.charAt(0));
-			System.out.println(puzzle);
+			
+			for(int x = 0;x<2;x++){
+				a[x].move(input.charAt(0));
+			}
+			for(int x = 0;x<2;x++){
+				System.out.println(a[x]);
+			}
+			
 			i++;
+		}
+		try {
+			for(int x = 0;x<2;x++){
+				a[x].writeToFile("a.txt");
+			}
+		} catch (IOException e) {
+			//TODO: handle exception
 		}
 		scan.close();
 	}
