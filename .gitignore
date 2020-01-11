@@ -13,4 +13,6 @@
 6/.idea
 
 6/CMakeLists.txt
-7/Main.class
+7/*.class
+
+7/*.txt
