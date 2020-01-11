@@ -40,8 +40,8 @@ JC = javac
 #
 
 CLASSES = \
-	FirstProject.java \
-	NPuzzle.java
+	Main.java \
+	BoardArray2D.java
 
 
 #
