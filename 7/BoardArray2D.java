@@ -97,5 +97,9 @@ public class BoardArray2D extends AbstractBoard {
 				coordinatesOfSpace[1]++;
 			} 
 		}	
+		if(isValid(direction)){
+			_lastMove = direction;
+			_numberOfMoves++;
+        }
 	}
 }

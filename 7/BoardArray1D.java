@@ -92,6 +92,11 @@ public class BoardArray1D extends AbstractBoard{
 				arr[size[0] * y + x ] = temp;
 				coordinatesOfSpace[1]++;
 			}
-		}
+        }
+        if(isValid(direction)){
+            _lastMove = direction;
+            _numberOfMoves++;
+        }
+        
 	}
 }

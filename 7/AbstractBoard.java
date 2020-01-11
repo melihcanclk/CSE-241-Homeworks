@@ -3,7 +3,13 @@ import java.io.*;
 public class AbstractBoard {
     protected int[] size = new int[2];
     protected int[] coordinatesOfSpace = new int[2];
+    protected static int _numberOfBoards = 0;
+    protected char _lastMove = 'S';
+    protected static int _numberOfMoves = 0;
 
+    public AbstractBoard(){
+        _numberOfBoards++;
+    }
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size[1]; i++) {
@@ -32,9 +38,11 @@ public class AbstractBoard {
 
     }
 
-    public void reset() {}
+    public void reset() {
+    }
 
-    public void readFromFile(String nameOfFile) {}
+    public void readFromFile(String nameOfFile) {
+    }
 
     public void writeToFile(String nameOfFile) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -46,7 +54,7 @@ public class AbstractBoard {
                     sb.append(" ");
             }
             if (i != size[1] - 1)
-                    sb.append("\n");
+                sb.append("\n");
         }
         String appendedString = sb.toString();
         FileWriter fileWriter = new FileWriter(nameOfFile);
@@ -82,6 +90,17 @@ public class AbstractBoard {
         return 0;
     }
 
+    public int numberOfBoards(){
+        return _numberOfBoards;
+    }
+
+    public int lastMove(){
+        return _lastMove;
+    }
+    public int numberOfMoves(){
+        return _numberOfMoves;
+    }
+
     public void calculateXandY(File f) throws IOException {
         Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(f), "US-ASCII"));
         int countY = 0;
@@ -114,13 +133,13 @@ public class AbstractBoard {
     public boolean isValid(final char direction) {
 
         if ((direction == 'L' || direction == 'l') && coordinatesOfSpace[0] - 1 >= 0
-                && cell(coordinatesOfSpace[0]-1, coordinatesOfSpace[1]) != 0) {
+                && cell(coordinatesOfSpace[0] - 1, coordinatesOfSpace[1]) != 0) {
             return true;
         } else if ((direction == 'R' || direction == 'r') && coordinatesOfSpace[0] + 1 < size[0]
-                && cell(coordinatesOfSpace[0]+1, coordinatesOfSpace[1]) != 0) {
+                && cell(coordinatesOfSpace[0] + 1, coordinatesOfSpace[1]) != 0) {
             return true;
         } else if ((direction == 'U' || direction == 'u') && coordinatesOfSpace[1] - 1 >= 0
-                && cell(coordinatesOfSpace[0] , coordinatesOfSpace[1]- 1) != 0) {
+                && cell(coordinatesOfSpace[0], coordinatesOfSpace[1] - 1) != 0) {
             return true;
         } else if ((direction == 'D' || direction == 'd') && coordinatesOfSpace[1] + 1 < size[1]
                 && cell(coordinatesOfSpace[0], coordinatesOfSpace[1] + 1) != 0) {
@@ -130,17 +149,16 @@ public class AbstractBoard {
         }
     }
 
-    public boolean isSolved()  {
-        int index=1;
-        for(int i = 0; i < size[1]; ++i){
-            for(int j = 0; j < size[0]; ++j){
-                int a = cell(j,i);
-                if(index == a){}
-                else if(a == 0){
+    public boolean isSolved() {
+        int index = 1;
+        for (int i = 0; i < size[1]; ++i) {
+            for (int j = 0; j < size[0]; ++j) {
+                int a = cell(j, i);
+                if (index == a) {
+                } else if (a == 0) {
                     index--;
-                }
-                else{
-                    if(i!= size[1]-1 || j != size[0] -1){
+                } else {
+                    if (i != size[1] - 1 || j != size[0] - 1) {
                         return false;
                     }
                 }
@@ -149,4 +167,38 @@ public class AbstractBoard {
         }
         return true;
     }
+
+    public boolean equals(AbstractBoard other) {
+        if (this.size[0] == other.size[0] && this.size[1] == other.size[1]) {
+            for (int i = 0; i < size[1]; ++i) {
+                for (int j = 0; j < size[0]; ++j) {
+                    if(this.cell(j,i) != other.cell(j, i)){
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;   
+    }
+
+    public boolean isDiffTwo(AbstractBoard other) {
+        int counter = 0;
+        if (this.size[0] == other.size[0] && this.size[1] == other.size[1]) {
+            for (int i = 0; i < size[1]; ++i) {
+                for (int j = 0; j < size[0]; ++j) {
+                    if(this.cell(j,i) != other.cell(j, i)){
+                        counter++;
+                    }
+                }
+            }
+            if(counter == 2){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;   
+    }
+    
 }
