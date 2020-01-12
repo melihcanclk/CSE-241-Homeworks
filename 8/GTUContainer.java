@@ -88,5 +88,21 @@ public class GTUContainer<T> {
             System.out.printf("Wrong argument");
         }
     }
+
+    public boolean empty(){
+        return this._size == 0;
+    }
+
+    public int size(){
+        return this._size;
+    }
+
+    public int max_size(){
+        return capacity;
+    }
     
+    public GTUContainer<T> clear() {
+        return new GTUContainer<T>(_type);
+    }
+
 }

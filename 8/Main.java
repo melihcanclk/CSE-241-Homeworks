@@ -65,6 +65,9 @@ public class Main {
         itr = a.iterator();
         print(itr);
         System.out.println();
+        a.clear();
+        print(itr);
+        System.out.println();
     }
 
     public static <T> void print(GTUIterator<T> itr) {
