@@ -6,14 +6,8 @@ public class GTUContainer<T> {
 
     public GTUContainer(Class<T> type) {
 
-        this._size = 0;
-        capacity = 1;
-
-        /**
-         * Creates a new array with the specified type and length at runtime
-         */
-        this.arr = (T[]) java.lang.reflect.Array.newInstance(type, capacity);
         this._type = type;
+        clear();
     }
 
     /**
@@ -101,8 +95,14 @@ public class GTUContainer<T> {
         return capacity;
     }
     
-    public GTUContainer<T> clear() {
-        return new GTUContainer<T>(_type);
+    public void clear(){
+        this._size = 0;
+        capacity = 1;
+
+        /**
+         * Creates a new array with the specified type and length at runtime
+         */
+        this.arr = (T[]) java.lang.reflect.Array.newInstance(_type, capacity);
     }
 
 }

@@ -19,4 +19,5 @@ public class GTUVector<T> extends GTUContainer<T> {
         arr[i + 1] = inserted;
         this._size++;
     }
+
 }

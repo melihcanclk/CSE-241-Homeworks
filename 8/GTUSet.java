@@ -39,5 +39,5 @@ public class GTUSet<T extends Comparable<T>> extends GTUContainer<T> {
         if (this._size <= this.capacity / 2)
             this.capacity /= 2;
     }
-
+   
 }
