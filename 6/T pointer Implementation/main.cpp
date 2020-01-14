@@ -44,7 +44,8 @@ GTUIterator<T> find_if(GTUIterator<T> first, GTUIterator<T> last,bool (*f)(T)){
         if((*f)(*i)){
             return i;
         }
-    }material theme
+    }
+}
 
 template <typename T>
 GTUIterator<T> for_each(GTUIterator<T> first, GTUIterator<T> last, void (*f)(T)){
