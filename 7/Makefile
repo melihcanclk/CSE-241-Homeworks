@@ -41,7 +41,9 @@ JC = javac
 
 CLASSES = \
 	Main.java \
-	BoardArray2D.java
+	BoardArray2D.java \
+	BoardArray1D.java \
+	AbstractBoard.java
 
 
 #

@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class AbstractBoard {
+public abstract class AbstractBoard {
     protected int[] size = new int[2];
     protected int[] coordinatesOfSpace = new int[2];
     protected static int _numberOfBoards = 0;

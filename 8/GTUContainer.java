@@ -1,4 +1,4 @@
-public class GTUContainer<T> {
+public abstract class GTUContainer<T> {
     protected T[] arr;
     protected Class<T> _type;
     protected int _size;
@@ -58,7 +58,7 @@ public class GTUContainer<T> {
     public GTUIterator<T> iterator() {
         return new GTUIteratorSet();
     }
-
+    @SuppressWarnings("unchecked")
     void insert(T inserted)
     {
         
@@ -70,6 +70,7 @@ public class GTUContainer<T> {
 
             if (_size +1 >= capacity) {
                 capacity *= 2;
+                
                 T[] dest = (T[]) java.lang.reflect.Array.newInstance(_type,capacity);
                 for(int j=0; j<_size; j++)
 					dest[j] = arr[j];
@@ -94,7 +95,7 @@ public class GTUContainer<T> {
     public int max_size(){
         return capacity;
     }
-    
+    @SuppressWarnings("unchecked")
     public void clear(){
         this._size = 0;
         capacity = 1;
