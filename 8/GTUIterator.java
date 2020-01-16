@@ -1,4 +1,6 @@
-public interface GTUIterator<T> {
+import java.util.Iterator;
+
+public interface GTUIterator<T> extends Iterator<T> {
     /**
      * Index-wise location of the iterator
      */
@@ -10,7 +12,8 @@ public interface GTUIterator<T> {
      * 
      * @return if there is an element or not
      */
-    boolean hasNext();
+    @Override
+    public boolean hasNext();
 
     /**
      * Returns value depending on the existence of a value at the next of
@@ -18,7 +21,7 @@ public interface GTUIterator<T> {
      * 
      * @return value of next index
      */
-
+    @Override
     T next();
 
     /**

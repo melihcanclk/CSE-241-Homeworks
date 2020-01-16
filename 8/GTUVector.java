@@ -20,6 +20,7 @@ public class GTUVector<T> extends GTUContainer<T> {
         arr[_size] = inserted;
         this._size++;
     }
+    
 /**
  * Insert function that insert value to the GTUVector with using GTUIterator<T>
  * @param iter Iterator that is pointing to anywhere of vector

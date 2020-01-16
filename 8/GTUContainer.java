@@ -70,7 +70,7 @@ public abstract class GTUContainer<T> {
          * 
          * @return value of current index
          */
-        @Override
+
         public T current() {
             return arr[position];
         }
@@ -80,7 +80,7 @@ public abstract class GTUContainer<T> {
          * 
          * @return position of iterator
          */
-        @Override
+
         public int index() {
             return position;
         }

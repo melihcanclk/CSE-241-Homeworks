@@ -109,7 +109,7 @@ public class Main {
     }
 
     /**
-     * Static method for test array with spesifications
+     * Static method for test array with specifications
      * 
      * @param <T>       Type of iterator
      * @param container Iterator for print GTUContainer<T>
