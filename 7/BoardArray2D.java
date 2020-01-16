@@ -100,6 +100,7 @@ public class BoardArray2D extends AbstractBoard {
 		if(isValid(direction)){
 			_lastMove = direction;
 			_numberOfMoves++;
+			System.out.println("Moved to " + direction);
         }
 	}
 }

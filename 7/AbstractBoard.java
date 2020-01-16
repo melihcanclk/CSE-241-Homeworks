@@ -12,6 +12,7 @@ public abstract class AbstractBoard {
     }
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(this.getClass().getName() + "\n");
         for (int i = 0; i < size[1]; i++) {
             for (int j = 0; j < size[0]; j++) {
                 int index = cell(j, i);
@@ -64,7 +65,7 @@ public abstract class AbstractBoard {
 
     public void move(final char direction) {}
 
-    public void stringAppend(int index, StringBuilder sb) {
+    protected void stringAppend(int index, StringBuilder sb) {
         if (size[0] * size[1] <= 100) {
             if (index == -1) {
                 sb.append("bb");
@@ -101,7 +102,7 @@ public abstract class AbstractBoard {
         return _numberOfMoves;
     }
 
-    public void calculateXandY(File f) throws IOException {
+    protected void calculateXandY(File f) throws IOException {
         Reader r = new BufferedReader(new InputStreamReader(new FileInputStream(f), "US-ASCII"));
         int countY = 0;
         int countX = 0;
@@ -130,7 +131,7 @@ public abstract class AbstractBoard {
         }
     }
 
-    public boolean isValid(final char direction) {
+    protected boolean isValid(final char direction) {
 
         if ((direction == 'L' || direction == 'l') && coordinatesOfSpace[0] - 1 >= 0
                 && cell(coordinatesOfSpace[0] - 1, coordinatesOfSpace[1]) != 0) {
@@ -182,7 +183,7 @@ public abstract class AbstractBoard {
         return false;   
     }
 
-    public boolean isDiffTwo(AbstractBoard other) {
+    protected boolean isDiffTwo(AbstractBoard other) {
         int counter = 0;
         if (this.size[0] == other.size[0] && this.size[1] == other.size[1]) {
             for (int i = 0; i < size[1]; ++i) {
