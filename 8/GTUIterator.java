@@ -1,6 +1,6 @@
 public interface GTUIterator<T> {
     /**
-     * Index-wise location of the iterator.
+     * Index-wise location of the iterator
      */
     int position = 0;
 
@@ -13,7 +13,7 @@ public interface GTUIterator<T> {
     boolean hasNext();
 
     /**
-     * Returns a boolean value depending on the existence of a value at the next of
+     * Returns value depending on the existence of a value at the next of
      * iterator.
      * 
      * @return value of next index
@@ -22,12 +22,17 @@ public interface GTUIterator<T> {
     T next();
 
     /**
-     * Returns a boolean value depending on the existence of a value at the current of
-     * iterator.
+     * Returns a boolean value depending on the existence of a value at the current
+     * of iterator.
      * 
      * @return value of current index
      */
     T current();
 
+    /**
+     * Returns the position of the iterator
+     * 
+     * @return position of iterator
+     */
     int index();
 }

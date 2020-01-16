@@ -10,8 +10,7 @@ public class Main {
 
         print(itr);
         specs(a);
-        
-        
+
         a.insert(3);
         a.insert(156);
 
@@ -24,20 +23,20 @@ public class Main {
 
         print(itr2);
         specs(b);
-        
+
         b.insert('y');
         b.insert('j');
         b.insert('i');
-        
+
         itr2 = b.iterator();
         print(itr2);
         specs(b);
 
-        System.out.printf("%s contains %d : %s\n",a.getClass().getName() ,3, a.contains(3));
-        System.out.printf("%s contains %d : %s\n",a.getClass().getName() , 7, a.contains(7));
+        System.out.printf("%s contains %d : %s\n", a.getClass().getName(), 3, a.contains(3));
+        System.out.printf("%s contains %d : %s\n", a.getClass().getName(), 7, a.contains(7));
 
-        System.out.printf("%s contains %s : %s\n",b.getClass().getName() , 'y', b.contains('y'));
-        System.out.printf("%s contains %s : %s\n",b.getClass().getName() , 'p', b.contains('p'));
+        System.out.printf("%s contains %s : %s\n", b.getClass().getName(), 'y', b.contains('y'));
+        System.out.printf("%s contains %s : %s\n", b.getClass().getName(), 'p', b.contains('p'));
 
         itr2 = b.iterator();
         itr2.next();
@@ -63,7 +62,7 @@ public class Main {
         itr2 = b.iterator();
         print(itr2);
         specs(b);
-       
+
         a.insert(24);
         itr = a.iterator();
         itr.next();
@@ -80,8 +79,7 @@ public class Main {
         itr = a.iterator();
         print(itr);
         specs(a);
-        
-        
+
         a.clear();
         itr = a.iterator();
         print(itr);
@@ -91,26 +89,38 @@ public class Main {
         itr2 = b.iterator();
         print(itr2);
         specs(b);
-        
+
     }
 
+    /**
+     * Static method for print array
+     * 
+     * @param <T> Type of iterator
+     * @param itr Iterator for print GTUContainer<T>
+     */
     public static <T> void print(GTUIterator<T> itr) {
-        
+
         while (itr.hasNext()) {
             System.out.printf("%s ", itr.next());
         }
-        
+
         System.out.println();
         System.out.println();
     }
 
+    /**
+     * Static method for test array with spesifications
+     * 
+     * @param <T>       Type of iterator
+     * @param container Iterator for print GTUContainer<T>
+     */
     public static <T> void specs(GTUContainer<T> container) {
 
         System.out.println(container.getClass().getName());
         System.out.printf("Size of Set: %d\n", container.size());
-        System.out.printf("Maxsize of Set: %d\n", container.max_size());
+        System.out.printf("Max size of Set: %d\n", container.max_size());
         System.out.printf("Is this Set Empty: %s\n", container.empty());
-        
+
         System.out.println();
     }
 
